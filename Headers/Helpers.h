@@ -1,6 +1,7 @@
 #ifndef HELPERS_H_INCLUDED
 #define HELPERS_H_INCLUDED
 #include <string.h>
+#include "DATAManipulation.h"
 
 int LinearUserSearch(User *ptr, char *username, char *password, char uType){
 
@@ -31,7 +32,7 @@ void nl(int amount){
 }
 
 void tb(int amount){
-    amount <= -1 ? 1 : amount;
+    amount <= 0 ? 1 : amount;
     for(int x = 0; x < amount; x++){
         printf("\t");
     }
@@ -51,6 +52,38 @@ void heading(char *heading){
     nlm(2);
     tb(3);
     printf("%s", heading);
+}
+
+int UserDataCount(){
+
+    FILE * file;
+
+    int fileCount = 0;
+
+    file = fopen(UserFileName, "rb+");
+
+    if(file == NULL){
+
+        perror("File failed to open");
+
+    }else{
+
+        User uObject;
+
+        while(!feof(file)){
+            fread(&uObject, sizeof(uObject), 1, file);
+            fileCount++;
+        }
+
+    }
+
+    fclose(file);
+    if(fileCount <= 0){
+        fileCount = -1;
+        return fileCount;
+    }
+
+    return fileCount-1;
 }
 
 #endif // HELPERS_H_INCLUDED

@@ -96,6 +96,7 @@ void LoginHandler(){
 }
 
 
+
 void Menu(int userType){
 
     heading("Menu");
@@ -143,7 +144,7 @@ void Menu(int userType){
         }
     }else if( (menuSelection == 'e' || menuSelection == 'E') && userType==Manager){
 
-        MenuReport(userType);
+        MenuReport();
 
     }
     else{
@@ -156,8 +157,27 @@ void Menu(int userType){
 
 void MenuA(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
+    char selection;
     if(userType == Manager){
         printf(" a). Add User\n c). Add Artiste\n c). Add Booking\n\n");
+
+        fflush(stdin);
+        printf("Select  Option: ");
+        scanf("%c", &selection);
+
+        if(selection == 'a' || selection == 'A'){
+            AddUser();
+        }
+
+        while( selection == 'a' || selection == 'A' ){
+
+        }
+
+
+
+        if(selection == 'a' || selection == 'A'){
+
+        }
     }else{
         printf(" a). Add Booking\n\n");
     }
@@ -171,7 +191,6 @@ void MenuB(int userType){
         printf(" a). Update Booking\n\n");
     }
 }
-
 
 void MenuDelete(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
@@ -203,11 +222,72 @@ void MenuSearch(int userType){
     }
 }
 
-void MenuReport(int userType){
+void MenuReport(){
+
+    printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
+
+    printf(" a). Artiste Report\n b). Foundation Report");
 
 }
 
 
+void AddUser(){
+
+    User newuser;
+
+    char utype;
+
+    printf("\nAdd A System User\n");
+
+    newuser.Id = UserDataCount()+1;
+
+    fflush(stdin);
+    printf("Enter First Name: ");
+    gets(newuser.FirstName);
+
+    fflush(stdin);
+    printf("\nEnter Last Name: ");
+    gets(newuser.LastName);
+
+    fflush(stdin);
+    printf("\nEnter System Username: ");
+    gets(newuser.Username);
+
+    fflush(stdin);
+    printf("Enter System Password: ");
+    gets(newuser.Password);
+
+    fflush(stdin);
+    printf("\nEnter Address: ");
+    gets(newuser.Address);
+
+    fflush(stdin);
+    printf("\nSelect User Type (M - Manager, C - Clerk): ");
+    scanf("%c", &utype);
+
+    UserType i;
+
+    if(utype == 'M' || utype == 'm'){
+            i = Manager;
+        newuser.UserType = i;
+    }else{
+        i = Clerk;
+        newuser.UserType = i;
+    }
+
+    time_t now;
+	time(&now);
+	ctime(&now);
+
+    strcpy(newuser.DateJoined,ctime(&now));
+
+    printf("\n%s Time: ",ctime(&now));
+
+    printf("\nMyId: %d", newuser.Id);
+
+    printf("\n%s\n", CreateUser(newuser, UserFileName, "ab+"));
+
+}
 
 
 #endif // FUNCTIONS_H_INCLUDED

@@ -14,9 +14,7 @@ typedef struct{
     char Password[25];
     UserType UserType;
     char Address[25];
-    char Email[25];
-    int DOB;
-    int DateJoined;
+    char DateJoined[25];
 }User;
 
 //Artiste Database
