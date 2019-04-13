@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1553857734 source:c:\users\jorda\desktop\programming 2 projects\bookingsoftware\bookingsoftware\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Headers/DATAManipulation.h"
+
+1553864656 c:\users\jorda\desktop\programming 2 projects\bookingsoftware\bookingsoftware\headers\structures.h
+
+1553865290 c:\users\jorda\desktop\programming 2 projects\bookingsoftware\bookingsoftware\headers\datamanipulation.h
+	<string.h>
+	"Structures.h"
+	"Variables.h"
+
+1553863152 c:\users\jorda\desktop\programming 2 projects\bookingsoftware\bookingsoftware\headers\variables.h
+
+1555086467 source:c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Headers/Functions.h"
+
+1555085645 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\datamanipulation.h
+	<string.h>
+	"Structures.h"
+	"Variables.h"
+
+1555085931 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\structures.h
+
+1553863154 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\variables.h
+
+1555085717 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\functions.h
+	"DATAManipulation.h"
+	"Helpers.h"
+
+1555085729 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\helpers.h
+	<string.h>
+
+1555150751 source:c:\users\jorda\desktop\bookingsoftware\bookingsoftware\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Headers/Functions.h"
+
+1555159767 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
+	"DATAManipulation.h"
+	"Helpers.h"
+
+1555146876 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\datamanipulation.h
+	<stdio.h>
+	<stdlib.h>
+	<strings.h>
+	<windows.h>
+	<ctype.h>
+	<string.h>
+	"Structures.h"
+	"Variables.h"
+
+1555150805 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\structures.h
+
+1553863154 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\variables.h
+
+1555157827 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\helpers.h
+	<string.h>
+

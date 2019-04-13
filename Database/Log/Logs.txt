@@ -1,0 +1,54 @@
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Mar 29 08:14:52 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Mar 29 08:14:52 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Mar 29 08:14:52 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Mar 29 08:16:15 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Mar 29 08:16:15 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Mar 29 08:16:15 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Apr 12 09:58:27 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Apr 12 09:58:27 2019
+
+*****************************************
+
+UserId: 1234
+Description: User tried to add already there
+Date: Fri Apr 12 09:58:27 2019
+
+*****************************************
+
