@@ -6,39 +6,11 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <windows.h>
-#include <ctype.h>
 #include <string.h>
-#include "Structures.h"
-#include "Variables.h"
-
+#include "Helpers.h"
 
 /**************************************************************************/
 
-User * ListOfUser(){
-
-    FILE * usr = NULL;
-
-    usr = fopen(UserFileName, "rb");
-
-    User users[UserDataCount()];
-
-    User * userPtr = &users[0];
-
-    User ob;
-
-    int c = 0;
-
-    while(!feof(usr)){
-        fread(&ob, sizeof(ob), 1, usr);
-        users[c] = ob;
-        c++;
-    }
-
-    fclose(usr);
-
-    return userPtr;
-
-}
 
 int CreateUser(User user, char *path, char *mode){
 
@@ -70,6 +42,7 @@ int CreateUser(User user, char *path, char *mode){
 
             usr = fopen(path,mode);
 
+            fseek(usr, user.Id, SEEK_SET);
             fwrite(&user, sizeof(user),1,usr);
 
             fclose(usr);
@@ -83,9 +56,12 @@ int CreateUser(User user, char *path, char *mode){
 
         fp = fopen(path,mode);
 
+        fseek(fp, user.Id, SEEK_SET);
         fwrite(&user, sizeof(user),1,fp);
 
         fclose(fp);
+
+        return 3;
     }
     //this while loop is responsible for looping through the file and check if the username exist or max record is reached
 

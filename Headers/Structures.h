@@ -8,13 +8,13 @@ typedef enum {ArtisteAccount, FoundationAccount} AccountTypes;
 //User Database
 typedef struct{
     int Id;
-    char Username[25];
-    char FirstName[25];
-    char LastName[25];
-    char Password[25];
+    char Username[40];
+    char FirstName[40];
+    char LastName[40];
+    char Password[40];
     UserType UserType;
-    char Address[25];
-    char DateJoined[25];
+    char Address[40];
+    char DateJoined[40];
 }User;
 
 //Artiste Database

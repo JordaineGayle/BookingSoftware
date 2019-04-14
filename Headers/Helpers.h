@@ -1,7 +1,8 @@
 #ifndef HELPERS_H_INCLUDED
 #define HELPERS_H_INCLUDED
 #include <string.h>
-#include "DATAManipulation.h"
+#include "Variables.h"
+#include "Structures.h"
 
 int file_exists(char * filename)
 {
@@ -54,6 +55,29 @@ int UserDataCount(){
 
 }
 
+User * ListOfUser(){
+
+    FILE * usr = NULL;
+
+    usr = fopen(UserFileName, "rb+");
+
+    const int res = UserDataCount();
+
+    User users[res+3];
+
+    User * userPtr = &users[0];
+
+    while(!feof(usr)){
+
+        fread(users, sizeof(User), res, usr);
+
+    }
+
+    fclose(usr);
+
+    return userPtr;
+
+}
 
 int LinearUserSearch(char *username, char *password, char uType){
 
@@ -80,15 +104,29 @@ int LinearUserSearch(char *username, char *password, char uType){
 
 }
 
+
+int UserExist(int Id){
+    const int counted = UserDataCount();
+
+    User * ptr = ListOfUser();
+
+    for(int usr = 0; usr <  counted; usr++){
+
+        if( (ptr+usr)->Id == Id ){
+            return usr;
+        }
+    }
+
+    return -1;
+}
+
 void nl(int amount){
-    amount <= -1 ? 1 : amount;
     for(int x = 0; x < amount; x++){
         printf("\n");
     }
 }
 
 void tb(int amount){
-    amount <= 0 ? 1 : amount;
     for(int x = 0; x < amount; x++){
         printf("\t");
     }
