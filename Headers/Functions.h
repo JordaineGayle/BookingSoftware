@@ -4,14 +4,15 @@
 #include <ctype.h>
 #include <conio.h>
 #include "DATAManipulation.h"
+
 void Welcome(){
     system("color f2");
-    printf("\t\tWelcome to Artist Management");
+    printf("\t\tWelcome to Artiste Management Jamaica");
     nl(2);
 }
 
 
-void AddUser(){
+void AddUser(int firstTime){
 
     User newuser;
 
@@ -45,6 +46,19 @@ void AddUser(){
     printf("\nSelect User Type (M - Manager, C - Clerk): ");
     scanf("%c", &utype);
 
+    while(firstTime == 1 && (utype != 'm' || utype != 'M') ){
+
+        fflush(stdin);
+        printf("\n#ERROR# -> First Time Users Are Required To Be Manager [UserError]\n");
+        printf("\nSelect User Type (M - Manager, C - Clerk): ");
+        scanf("%c", &utype);
+
+        if(utype == 'M' || utype == 'm'){
+            break;
+        }
+
+    }
+
 
     if(utype == 'M' || utype == 'm'){
         newuser.UserType = Manager;
@@ -74,7 +88,7 @@ void AddUser(){
         printf("\nAn Error Has Occurred\n");
     }
 
-    AddUser();
+    //AddUser();
 }
 
 void DeleteUser(){
@@ -168,6 +182,166 @@ void DeleteUser(){
 }
 
 
+void AddArtiste() {
+
+	Artiste artiste;
+
+	Foundation foundation;
+
+	Accounts aAccount;
+
+	Accounts fAccount;
+
+	printf("\n Add An Artiste\n\n");
+
+	aAccount.Id = AccountsCount() + 1;
+	fAccount.Id = aAccount.Id+1;
+
+	foundation.Id = FoundationCount() + 1;
+
+	artiste.Id = ArtisteCount() + 1;
+
+	printf("*********************************************\n");
+
+	printf(" Artiste Info\n\n");
+
+	fflush(stdin);
+	printf(" Enter Artiste's Stage Name: ");
+	gets(artiste.StageName);
+
+	while (ArtisteExist(artiste.StageName) > -1) {
+        fflush(stdin);
+		printf("\n#ERROR# -> Artiste Name Already Taken [StageName Error]\n");
+		printf(" Enter Artiste's Stage Name: ");
+		gets(artiste.StageName);
+	}
+
+    fflush(stdin);
+	printf("\n Enter Artiste's Firstname: ");
+	gets(artiste.FirstName);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's Lastname: ");
+	gets(artiste.LastName);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's Telephone#: ");
+	gets(artiste.TelephoneNumber);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's PhysicalAddress: ");
+	gets(artiste.PhysicalAddress);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's Email: ");
+	gets(artiste.Email);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's Genre: ");
+	gets(artiste.Genre);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's Account Balance: ");
+	scanf("%f",&aAccount.AccountInfo.AccountBalance);
+
+	fflush(stdin);
+	printf("\n Enter Artiste's Yearly Earnings: ");
+    scanf("%f",&artiste.YearlyEarnings);
+
+    fflush(stdin);
+	printf("\n\n*********************************************\n");
+
+	printf(" Foundation Info\n\n");
+
+	fflush(stdin);
+	printf(" Enter Foundation Name: ");
+	gets(foundation.NameOfFoundation);
+
+	fflush(stdin);
+	printf("\n Enter Foundation Address: ");
+	gets(foundation.Address);
+
+	fflush(stdin);
+	printf("\n Enter Foundation Year Founded: ");
+	scanf("%d",&foundation.YearFounded);
+
+	fflush(stdin);
+	printf("\n Enter Foundation Employee Total: ");
+	scanf("%d",&foundation.NumberOfEmployees);
+
+	fflush(stdin);
+	printf("\n Enter Foundation Major Charity(Current) : ");
+	gets(foundation.MajorityCurCharity);
+
+	fflush(stdin);
+	printf(" \nEnter Foundation's Account Balance: ");
+    scanf("%f",&fAccount.AccountInfo.AccountBalance);
+
+	int fRes = CreateFoundation(foundation, FoundationFileName, "ab+");
+	if (fRes < 0) {
+		printf("\n#ERROR# -> Failed To Create Foundation [Internal Error]\n");
+		AddArtiste();
+	}
+	else {
+
+		artiste.FoundationId = fRes;
+
+		int aRes = CreateArtiste(artiste, ArtisteFileName, "ab+");
+
+		if (aRes < 0) {
+			printf("\n#ERROR# -> Failed To Create Artiste [Internal Error]\n");
+			AddArtiste();
+		}
+		else {
+
+			int foundationAccNum = randAccNum(10000000, 1000000000);
+			Sleep(200);
+			int artisteAccNum = randAccNum(10000000, 100000000);
+
+			while (AccountExist(foundationAccNum) > -1) {
+				foundationAccNum = randAccNum(10000000, 1000000000);
+			}
+
+			while (AccountExist(artisteAccNum) > -1) {
+				artisteAccNum = randAccNum(10000000, 100000000);
+			}
+
+			fAccount.RefId = fRes;
+			fAccount.AccountInfo.AccountNum = foundationAccNum;
+			fAccount.AccountInfo.AccountType = FoundationAccount;
+
+			aAccount.RefId = aRes;
+			aAccount.AccountInfo.AccountNum = artisteAccNum;
+			aAccount.AccountInfo.AccountType = ArtisteAccount;
+
+			int success = CreateAccount(aAccount,AccountsFileName,"ab+");
+			Sleep(200);
+			int success1 = CreateAccount(fAccount,AccountsFileName,"ab+");
+
+			if (success == 3 && success1 == 3) {
+				printf("\nAccount Created Successfully!\n");
+			}
+			else {
+				printf("\n#ERROR# -> An Unexpected Error Has Occured [Internal System Error]\n");
+			}
+
+			AddArtiste();
+
+		}
+
+
+	}
+
+}
+
+void DeleteArtiste() {
+
+}
+
+void UpdateArtiste() {
+
+}
+
 void MenuA(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
     char selection;
@@ -179,11 +353,11 @@ void MenuA(int userType){
         scanf("%c", &selection);
 
         if(selection == 'a' || selection == 'A'){
-            AddUser();
+            AddUser(0);
         }
 
         while( selection == 'b' || selection == 'B' ){
-
+			AddArtiste();
         }
 
 

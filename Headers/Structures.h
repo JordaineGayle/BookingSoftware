@@ -20,38 +20,38 @@ typedef struct{
 //Artiste Database
 typedef struct{
     int Id;
-    char *StageName;
-    char *FirstName;
-    char *LastName;
-    char *TelephoneNumber;
-    char *PhysicalAddress;
-    char *Email;
-    char *Genre;
-    char FoundationId;
+    char StageName[40];
+    char FirstName[40];
+    char LastName[40];
+    char TelephoneNumber[40];
+    char PhysicalAddress[40];
+    char Email[40];
+    char Genre[40];
+    int FoundationId;
+    float YearlyEarnings;
 }Artiste;
 
 //Foundation Database
 typedef struct{
  int Id;
- char *NameOfFoundation;
+ char NameOfFoundation[100];
  int YearFounded;
- char *Address;
+ char Address[100];
  int NumberOfEmployees;
+ char MajorityCurCharity[100];
 }Foundation;
 
 typedef struct{
- int AccountNum;
+ long AccountNum;//accountNumber
  float AccountBalance;
  AccountTypes AccountType; //(Artist or Foundation)
 }AccountInfo;
 
 //Accounts Database
 typedef struct{
- int Id;
+ int Id; //Record
  int RefId;//(weather artist id or foundation id)
  AccountInfo AccountInfo;
- float YearlyEarnings;
- char *MajorityCurCharity;
 }Accounts;
 
 

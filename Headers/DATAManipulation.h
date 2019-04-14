@@ -14,16 +14,9 @@
 
 int CreateUser(User user, char *path, char *mode){
 
-    //setting the record counter
-    recordCounter = 0;
-
     FILE * usr;
 
-    int exist = file_exists(path);
-
-    //User userObject;
-
-    if(exist == 0){
+    if(file_exists(path) == 0){
 
         int currentUsers = UserDataCount();
 
@@ -35,10 +28,10 @@ int CreateUser(User user, char *path, char *mode){
             User * ptr = ListOfUser();
 
             for(int x = 0; x < currentUsers; x++){
-                if( (ptr+x)->Id == user.Id && (strcmp((ptr+x)->Username, user.Username) == 0)){
+                if( (ptr+x)->UserType == user.UserType && (strcmp((ptr+x)->Username, user.Username) == 0)){
                     return 2;
+                }
             }
-        }
 
             usr = fopen(path,mode);
 
@@ -63,9 +56,9 @@ int CreateUser(User user, char *path, char *mode){
 
         return 3;
     }
-    //this while loop is responsible for looping through the file and check if the username exist or max record is reached
 
 }
+
 
 char * CreateBooking(Booking booking, char *path, char *mode){
 
@@ -126,177 +119,154 @@ char * CreateBooking(Booking booking, char *path, char *mode){
     fclose(book);
 }
 
-char * CreateArtiste(Artiste artiste, char *path, char *mode){
-    //setting the record counter
-    recordCounter = 0;
 
-    //file pointer
-    FILE * art = NULL;
+int CreateArtiste(Artiste artiste, char *path, char *mode){
 
-    //opening the file
-    art = fopen(path,mode);
+    if(file_exists(path) == 0){
 
-    //creating an instance of the Artiste structure to model data
-    Artiste artObj;
+        int totalRecords = ArtisteCount();
 
-    while(!feof(art)){
+        if(totalRecords >= 20){
 
-        //setting back the recordExist flag 0 on each run
-        recordExist = 0;
+            return -1; //maximum amount of artiste
 
-        //reading data from file and sending it to struct
-        fread(&artObj,sizeof(artObj),1,art);
+        }else{
 
-        //check if the stageName sent in matches the stageName in the file and also Id
-        if((strcmp(artObj.StageName, artiste.StageName)==0) && (artiste.Id == artObj.Id) ){
+            int artisteExist = ArtisteExist(artiste.StageName);
 
-            //setting recordExist to one if record exist
-            recordExist = 1;
+            if(artisteExist >- 1){
+                return -2;
+            }else{
 
-            //recordCounter++;
-            break;
+                FILE * fp;
+
+                fp = fopen(path,mode);
+
+                fseek(fp, artiste.Id, SEEK_SET);
+
+                fwrite(&artiste, sizeof(artiste),1,fp);
+
+                fclose(fp);
+
+                return artiste.Id;
+            }
         }
-        //checking the number of records in the file
-        recordCounter++;
-    }
 
-    //checking if the recordCounter is less than or equal to three
-    if(recordCounter <= MAX && recordExist == 0){
-
-        //writing user data from a user structure to the file
-        fwrite(&artiste, sizeof(artiste),1,art);
-
-        //return a message if data was added successfully
-        return "Record Created Successfully!";
-
-    }else if(recordCounter <= MAX && recordExist == 1){ //checking if the RecordExist and return message
-        return "Artiste Already Exist"; //tell the worker the record exist
     }else{
-        return "Artiste list is full"; //telling the worker that no more records can be entered
+
+        FILE * fp;
+
+        fp = fopen(path,mode);
+
+        fseek(fp, artiste.Id, SEEK_SET);
+
+        fwrite(&artiste, sizeof(artiste),1,fp);
+
+        fclose(fp);
+
+        return artiste.Id;
     }
 
-    //closing back the user file
-    fclose(art);
+}
+
+int CreateFoundation(Foundation found, char *path, char *mode){
+
+	if (file_exists(path) == 0) {
+
+		int foundationExist = FoundationExist(found.NameOfFoundation);
+
+		if (foundationExist > -1) {
+
+			int foundationId = (FoundationList() + foundationExist)->Id;
+
+			return foundationId;
+		}
+		else {
+
+			FILE * fp;
+
+			fp = fopen(path, mode);
+
+			fseek(fp, found.Id, SEEK_SET);
+
+			fwrite(&found, sizeof(found), 1, fp);
+
+			fclose(fp);
+
+			return found.Id;
+		}
+	}
+	else {
+
+		FILE * fp;
+
+		fp = fopen(path, mode);
+
+		fseek(fp, found.Id, SEEK_SET);
+
+		fwrite(&found, sizeof(found), 1, fp);
+
+		fclose(fp);
+
+		return found.Id;
+	}
 
 
 }
 
-char * CreateFoundation(Foundation found, char *path, char *mode){
-        //setting the record counter
-    recordCounter = 0;
+int CreateAccount(Accounts account, char *path, char *mode){
 
-    //file pointer
-    FILE * foundation = NULL;
+	if (file_exists(path) == 0) {
 
-    //opening the file
-    foundation = fopen(path,mode);
+		int accountExist = AccountExist(account.AccountInfo.AccountNum);
 
-    //creating an instance of the Artiste structure to model data
-    Foundation fObj;
+		if (accountExist > -1) {
 
-    while(!feof(foundation)){
+			//int foundationId = (FoundationList() + foundationExist)->Id;
 
-        //setting back the recordExist flag 0 on each run
-        recordExist = 0;
+			return 2; //already There
+		}
+		else {
 
-        //reading data from file and sending it to struct
-        fread(&fObj,sizeof(fObj),1,foundation);
+			FILE * fp;
 
-        //check if the stageName sent in matches the stageName in the file and also Id
-        if((strcmp(fObj.NameOfFoundation, found.NameOfFoundation)==0) && (fObj.Id == found.Id) ){
+			fp = fopen(path, mode);
 
-            //setting recordExist to one if record exist
-            recordExist = 1;
+			fseek(fp, account.Id, SEEK_SET);
 
-            //recordCounter++;
-            break;
-        }
-        //checking the number of records in the file
-        recordCounter++;
-    }
+			fwrite(&account, sizeof(account), 1, fp);
 
-    //checking if the recordCounter is less than or equal to three
-    if(recordCounter <= MAX && recordExist == 0){
+			fclose(fp);
 
-        //writing user data from a user structure to the file
-        fwrite(&found, sizeof(found),1,foundation);
+			return 3;
+		}
+	}
+	else {
 
-        //return a message if data was added successfully
-        return "Record Created Successfully!";
+		FILE * fp;
 
-    }else if(recordCounter <= MAX && recordExist == 1){ //checking if the RecordExist and return message
-        return "Foundation Already Exist"; //tell the worker the record exist
-    }else{
-        return "Foundation list is full"; //telling the worker that no more records can be entered
-    }
+		fp = fopen(path, mode);
 
-    //closing back the user file
-    fclose(foundation);
+		fseek(fp, account.Id, SEEK_SET);
+
+		fwrite(&account, sizeof(account), 1, fp);
+
+		fclose(fp);
+
+		return 3;
+
+
+	}
 }
 
-char * CreateAccount(Accounts account, char *path, char *mode){
-        //setting the record counter
-    recordCounter = 0;
-
-    //file pointer
-    FILE * acc = NULL;
-
-    //opening the file
-    acc = fopen(path,mode);
-
-    //creating an instance of the Artiste structure to model data
-    Accounts accObj;
-
-    while(!feof(acc)){
-
-        //setting back the recordExist flag 0 on each run
-        recordExist = 0;
-
-        //reading data from file and sending it to struct
-        fread(&accObj,sizeof(accObj),1,acc);
-
-        //check if the stageName sent in matches the stageName in the file and also Id
-        if( (accObj.RefId == account.RefId) && (accObj.AccountInfo.AccountType == account.AccountInfo.AccountType) ){
-
-            //setting recordExist to one if record exist
-            recordExist = 1;
-
-            //recordCounter++;
-            break;
-        }
-        //checking the number of records in the file
-        recordCounter++;
-    }
-
-    //checking if the recordCounter is less than or equal to three
-    if(recordCounter <= MAX && recordExist == 0){
-
-        //writing user data from a user structure to the file
-        fwrite(&account, sizeof(account),1,acc);
-
-        //return a message if data was added successfully
-        return "Record Created Successfully!";
-
-    }else if(recordCounter <= MAX && recordExist == 1){ //checking if the RecordExist and return message
-        return "Account Already Exist"; //tell the worker the record exist
-    }else{
-        return "Account list is full"; //telling the worker that no more records can be entered
-    }
-
-    //closing back the user file
-    fclose(acc);
-}
 
 char * ArtisteRep(ArtisteReport report, char *path, char *mode){
 
-    //file pointer
     FILE * aReport = NULL;
 
-    //opening the file
     aReport = fopen(path,mode);
 
     fprintf(aReport,"Id\tArtisteId\tYearly Earnings\n%d\t%d\t%.2f\t%s\n****************************************************************\n\n",report.Id,report.ArtisteId,report.YearlyEarnings,report.Date);
-
 
     fclose(aReport);
 
@@ -354,19 +324,6 @@ void AddLog(ActivityLog log,char *path, char *mode){
 
 /**************************************************************************/
 
-
-
-
-/*char * current_Time(){
-    time_t now;
-
-	// Obtain current time
-	// time() returns the current time of the system as a time_t value
-	time(&now);
-
-	// Convert to local time format and print to stdout
-	return ctime(&now);
-}*/
 
 
 #endif // DATAMANIPULATION_H_INCLUDED
