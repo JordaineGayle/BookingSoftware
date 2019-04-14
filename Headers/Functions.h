@@ -63,8 +63,7 @@ int Login(){
 
     nlm(2);
 
-    User * ptr = ListOfUsers();
-    int indexed = LinearUserSearch(ptr, tempUsername, tempPassword, userType);
+    int indexed = LinearUserSearch(tempUsername, tempPassword, userType);
 
     if(indexed > -1 && indexed < 3){
         return indexed;
@@ -86,7 +85,7 @@ void LoginHandler(){
     }
 
     if(loginStatus > -1){
-        User user = *(ListOfUsers()+loginStatus);
+        User user = *(ListOfUser()+loginStatus);
         printf("Welcome, %s %s", user.FirstName, user.LastName);
         Menu(user.UserType);
     }else{
@@ -265,26 +264,25 @@ void AddUser(){
     printf("\nSelect User Type (M - Manager, C - Clerk): ");
     scanf("%c", &utype);
 
-    UserType i;
 
     if(utype == 'M' || utype == 'm'){
-            i = Manager;
-        newuser.UserType = i;
+        newuser.UserType = Manager;
     }else{
-        i = Clerk;
-        newuser.UserType = i;
+        newuser.UserType = Clerk;
     }
 
-    time_t now;
-	time(&now);
-	ctime(&now);
+    //time_t now;
+	//time(&now);
+	//ctime(&now);
 
-    strcpy(newuser.DateJoined,ctime(&now));
+	newuser.DateJoined[0] = 'w';
+    //strcpy(newuser.DateJoined,ctime(&now));
 
-    printf("\n%s Time: ",ctime(&now));
-
+    //printf("\n%s Time: ",ctime(&now));
+    fflush(stdin);
     printf("\nMyId: %d", newuser.Id);
 
+    fflush(stdin);
     printf("\n%s\n", CreateUser(newuser, UserFileName, "ab+"));
 
 }

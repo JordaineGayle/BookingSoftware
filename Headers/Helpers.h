@@ -3,7 +3,59 @@
 #include <string.h>
 #include "DATAManipulation.h"
 
-int LinearUserSearch(User *ptr, char *username, char *password, char uType){
+int file_exists(char * filename)
+{
+    FILE * file;
+    file = fopen(filename, "rb");
+    if (!file) //I'm sure, you meant for READING =)
+    {
+        fclose(file);
+        return 1;
+    }
+    fclose(file);
+    return 0;
+}
+
+int UserDataCount(){
+
+    FILE * file;
+
+    int fileCount = 0;
+
+    if(file_exists(UserFileName)==0){
+        file = fopen(UserFileName, "rb+");
+
+    if(file == NULL){
+
+        perror("File failed to open");
+
+    }else{
+
+        User uObject;
+
+        while(!feof(file)){
+            fread(&uObject, sizeof(uObject), 1, file);
+            fileCount++;
+        }
+
+    }
+
+    fclose(file);
+    if(fileCount <= 0){
+        fileCount = -1;
+        return fileCount;
+    }
+
+    return fileCount-1;
+    }else{
+        return 0;
+    }
+
+
+}
+
+
+int LinearUserSearch(char *username, char *password, char uType){
 
     UserType userType;
 
@@ -13,7 +65,11 @@ int LinearUserSearch(User *ptr, char *username, char *password, char uType){
         userType = Clerk;
     }
 
-    for(int usr = 0; usr < 3; usr++){
+    const int counted = UserDataCount();
+
+    User * ptr = ListOfUser();
+
+    for(int usr = 0; usr <  counted; usr++){
 
         if( (strcmp((ptr+usr)->Username, username)==0) && (strcmp((ptr+usr)->Password, password)==0) && (ptr+usr)->UserType == userType){
             return usr;
@@ -54,36 +110,8 @@ void heading(char *heading){
     printf("%s", heading);
 }
 
-int UserDataCount(){
 
-    FILE * file;
 
-    int fileCount = 0;
 
-    file = fopen(UserFileName, "rb+");
-
-    if(file == NULL){
-
-        perror("File failed to open");
-
-    }else{
-
-        User uObject;
-
-        while(!feof(file)){
-            fread(&uObject, sizeof(uObject), 1, file);
-            fileCount++;
-        }
-
-    }
-
-    fclose(file);
-    if(fileCount <= 0){
-        fileCount = -1;
-        return fileCount;
-    }
-
-    return fileCount-1;
-}
 
 #endif // HELPERS_H_INCLUDED

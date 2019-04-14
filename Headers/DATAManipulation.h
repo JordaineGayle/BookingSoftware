@@ -14,60 +14,81 @@
 
 /**************************************************************************/
 
-char * CreateUser(User user, char *path, char *mode){
+User * ListOfUser(){
+
+    FILE * usr = NULL;
+
+    usr = fopen(UserFileName, "rb");
+
+    User users[UserDataCount()];
+
+    User * userPtr = &users[0];
+
+    User ob;
+
+    int c = 0;
+
+    while(!feof(usr)){
+        fread(&ob, sizeof(ob), 1, usr);
+        users[c] = ob;
+        c++;
+    }
+
+    fclose(usr);
+
+    return userPtr;
+
+}
+
+int CreateUser(User user, char *path, char *mode){
 
     //setting the record counter
     recordCounter = 0;
 
-    //file pointer
-    FILE * usr = NULL;
+    FILE * usr;
 
-    //opening the file
-    usr = fopen(path,mode);
+    int exist = file_exists(path);
 
-    //creating an instance of the user structure to model data
-    User userObject;
+    //User userObject;
 
-    //this while loop is responsible for looping through the file and check if the username exist or max record is reached
-    while(!feof(usr)){
+    if(exist == 0){
 
-        //setting back the recordExist flag 0 on each run
-        recordExist = 0;
+        int currentUsers = UserDataCount();
 
-        //reading data from file and sending it to struct
-        fread(&userObject,sizeof(userObject),1,usr);
+        if(currentUsers >= 3){
 
-        //check if the username sent in matches the user name in the file
-        if((strcmp(userObject.Username, user.Username)==0) && (userObject.Id == user.Id) ){
+            return 1;
 
-            //setting recordExist to one if record exist
-            recordExist = 1;
+        }else{
+            User * ptr = ListOfUser();
 
-            //recordCounter++;
-            break;
+            for(int x = 0; x < currentUsers; x++){
+                if( (ptr+x)->Id == user.Id && (strcmp((ptr+x)->Username, user.Username) == 0)){
+                    return 2;
+            }
         }
-        //checking the number of records in the file
-        recordCounter++;
-    }
 
-    //checking if the recordCounter is less than or equal to three
-    if(recordCounter <= 3 && recordExist == 0){
+            usr = fopen(path,mode);
 
-        //writing user data from a user structure to the file
-        fwrite(&user, sizeof(user),1,usr);
+            fwrite(&user, sizeof(user),1,usr);
 
-        //return a message if data was added successfully
-        return "Record Created Successfully!";
+            fclose(usr);
 
-    }else if(recordCounter <= 3 && recordExist == 1){ //checking if the RecordExist and return to the user
+            return 3;
+        }
 
-        return "Already Exist"; //tell the user the record exist
     }else{
 
-        return "User list is full"; //telling the user that no more records can be entered
+        FILE * fp;
+
+        fp = fopen(path,mode);
+
+        fwrite(&user, sizeof(user),1,fp);
+
+        fclose(fp);
     }
-    //closing back the user file
-    fclose(usr);
+    //this while loop is responsible for looping through the file and check if the username exist or max record is reached
+
 }
 
 char * CreateBooking(Booking booking, char *path, char *mode){
@@ -358,25 +379,7 @@ void AddLog(ActivityLog log,char *path, char *mode){
 /**************************************************************************/
 
 
-User * ListOfUsers(){
 
-    FILE * usr = NULL;
-
-    usr = fopen(UserFileName, "rb");
-
-    User users[3];
-
-    User * userPtr = &users[0];
-
-    while(!feof(usr)){
-        fread(users, sizeof(User), 3, usr);
-    }
-
-    fclose(usr);
-
-    return userPtr;
-
-}
 
 /*char * current_Time(){
     time_t now;
