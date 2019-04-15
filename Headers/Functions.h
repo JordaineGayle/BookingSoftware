@@ -257,6 +257,13 @@ void AddArtiste() {
 	printf(" Enter Foundation Name: ");
 	gets(foundation.NameOfFoundation);
 
+	while (FoundationExist(foundation.NameOfFoundation) > -1) {
+		fflush(stdin);
+		printf("\n#ERROR# -> Foundation Azlready Exist [FoundationName Error]\n");
+		printf(" Enter Foundation Name: ");
+		gets(foundation.NameOfFoundation);
+	}
+
 	fflush(stdin);
 	printf("\n Enter Foundation Address: ");
 	gets(foundation.Address);
@@ -336,6 +343,121 @@ void AddArtiste() {
 
 void DeleteArtiste() {
 
+    const int totalArtiste = ArtisteCount();
+
+    if(totalArtiste <= 0){
+        printf("\n#ERROR# -> Sorry No Artiste Created To Delete [No Artiste Created]\n");
+        MenuDelete(Manager);
+        //getch();
+    }else{
+
+        char selection[40];
+
+	printf("\nDelete A Artiste\n\n");
+
+	printf("\tId\tStage Name\tFirstname\tLastName\tGenre\tYearly Earnings\t\tFoundation\n\n");
+
+	Artiste * ptr = ArtisteList();
+
+	for (int x = 0; x < totalArtiste; x++) {
+		fflush(stdin);
+		printf("\t%-2d\t%-8s\t%-8s\t%-8s\t%-8s\t%-8.2f\t%-8s\n\n",
+			(ptr+x)->Id, (ptr+x)->StageName, (ptr+x)->FirstName,(ptr+x)->LastName,(ptr+x)->Genre, (ptr+x)->YearlyEarnings, (FoundationList()+x)->NameOfFoundation);
+	}
+
+	fflush(stdin);
+	printf("Select StageName Of Artiste To Delete: ");
+	gets(selection);
+
+	int exist = ArtisteExist(selection);
+
+	if (exist > -1) {
+
+		int oldArrayLength = ArtisteCount();
+
+		const int newArrayLength = oldArrayLength - 1;
+
+		Artiste newArtisteList[newArrayLength];
+
+		Foundation newFoundationList[newArrayLength];
+
+		Accounts newAccountList[AccountsCount() - 2];
+
+		int newId = 1;
+		int newIndex = 0;
+		int newAccLength = 0;
+
+		for (int x = 0; x < oldArrayLength; x++) {
+
+			if (exist != x) {
+
+				Artiste ar;
+
+				ar = *(ArtisteList()+x);
+
+				ar.Id = newId;
+
+				ar.FoundationId = newId;
+
+				newArtisteList[newIndex] = ar;
+
+				newId++;
+				newIndex++;
+			}
+
+		}
+
+		for(int x = 0; x < newArrayLength; x++){
+            newFoundationList[x] = *(delFoundation( (ArtisteList()+exist)->Id) + x);
+		}
+
+		for (int x = 0; x < (AccountsCount() - 2); x++) {
+			newAccountList[x] = *(delAccount((ArtisteList())->Id) + x);
+			newAccLength++;
+		}
+
+
+		for (int x = 0; x < newArrayLength; x++) {
+			fflush(stdin);
+			printf("\n\n\t%-2d\t%-8s\t%-8s\t%-8s\t%-8s\t%-8.2f\t%-8s\n\n",
+				newArtisteList[x].Id, newArtisteList[x].StageName, newArtisteList[x].FirstName, newArtisteList[x].LastName,
+				 newArtisteList[x].Genre, newArtisteList[x].YearlyEarnings, newFoundationList[x].NameOfFoundation);
+		}
+
+		FILE * file;
+
+		file = fopen(ArtisteFileName,"wb+");
+
+		fwrite(newArtisteList, sizeof(Artiste), newArrayLength, file);
+
+		fclose(file);
+        Sleep(200);
+		FILE * file1;
+
+		file1 = fopen(FoundationFileName, "wb+");
+
+		fwrite(newFoundationList, sizeof(Foundation), newArrayLength, file1);
+
+		fclose(file1);
+        Sleep(200);
+		FILE * file2;
+
+		file2 = fopen(AccountsFileName, "wb+");
+
+		fwrite(newAccountList, sizeof(Accounts), newAccLength, file2);
+
+		fclose(file2);
+
+
+
+
+	}
+	else {
+		printf("\n#ERROR# -> Failed To Delete Artiste [Doesn't Exist]\n");
+	}
+
+	DeleteArtiste();
+    }
 }
 
 void UpdateArtiste() {
@@ -387,7 +509,7 @@ void MenuDelete(int userType){
 
         char selection;
 
-        printf(" a). Delete User\n c). Delete Artiste\n c). Delete Booking\n\n");
+        printf(" a). Delete User\n b). Delete Artiste\n c). Delete Booking\n\n");
 
         fflush(stdin);
         printf("Select  Option: ");
@@ -395,17 +517,12 @@ void MenuDelete(int userType){
 
         if(selection == 'a' || selection == 'A'){
             DeleteUser();
-        }
+        }else if( selection == 'b' || selection == 'B' ){
+			DeleteArtiste();
+        }else if(selection == 'c' || selection == 'C'){
 
-        while( selection == 'b' || selection == 'B' ){
+		}
 
-        }
-
-
-
-        if(selection == 'c' || selection == 'C'){
-
-        }
     }
 }
 
@@ -581,6 +698,7 @@ void LoginHandler(){
     if(loginStatus > -1){
         User user = *(ListOfUser()+loginStatus);
         printf("Welcome, %s %s", user.FirstName, user.LastName);
+        globalUser = user.UserType;
         Menu(user.UserType);
     }else{
         printf("Login Failed Please Try Again Later....");

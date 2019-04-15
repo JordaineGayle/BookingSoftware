@@ -188,7 +188,7 @@ Artiste * ArtisteList(){
 
         const int res = ArtisteCount();
 
-        Artiste artiste[res+3];
+        Artiste artiste[res+100];
 
         Artiste * ptr = &artiste[0];
 
@@ -235,15 +235,6 @@ int ArtisteExist(char * stageName){
 
 
 /***********************Artiste****************************/
-
-
-
-
-
-/***********************Booking****************************/
-
-
-/***********************Booing****************************/
 
 
 
@@ -298,7 +289,7 @@ Foundation * FoundationList() {
 
 		const int res = FoundationCount();
 
-		Foundation foundation[res + 3];
+		Foundation foundation[res + 100];
 
 		Foundation * ptr = &foundation[0];
 
@@ -343,7 +334,33 @@ int FoundationExist(char * foundationName) {
 }
 
 
+Foundation * delFoundation(int Id){
 
+        const int counted = FoundationCount();
+
+        Foundation fd[counted - 1];
+        Foundation *newFoundation = &fd[0];
+
+        int y = 0;
+        int id = 1;
+
+        Foundation * ptr = FoundationList();
+		for (int x = 0; x < counted; x++) {
+
+                if( (ptr+x)->Id != Id){
+                    Foundation f;
+                    f = *(ptr+x);
+                    f.Id = id;
+                    fd[y] = f;
+                    y++;
+                    id++;
+                }
+		}
+
+
+
+		return newFoundation;
+}
 
 
 /***********************Foundation****************************/
@@ -402,7 +419,7 @@ Accounts * AccountsList() {
 
 		const int res = AccountsCount();
 
-		Accounts accounts[res + 3];
+		Accounts accounts[res + 100];
 
 		Accounts * ptr = &accounts[0];
 
@@ -445,10 +462,54 @@ int AccountExist(int accNum) {
 	return -1;
 }
 
+
+Accounts * delAccount(int refId){
+
+        const int counted = AccountsCount();
+
+        //printf("\n\nTotal Accounts: %d\n\n",counted);
+
+        Accounts ac[counted-2];
+        Accounts *newAccount = &ac[0];
+        int y = 0;
+        int id = 1;
+
+        Accounts * ptr = AccountsList();
+		for (int x = 0; x < counted; x++) {
+
+                if( (ptr+x)->RefId != refId){
+                    Accounts a;
+                    a = *(ptr+x);
+                    a.Id = id;
+
+                    if((ptr+x)->RefId <= 1){
+                        a.RefId = 1;
+                    }else{
+                        a.RefId-=1;
+                    }
+
+                    ac[y] = a;
+                    y++;
+                    id++;
+                }
+		}
+
+
+
+		return newAccount;
+}
+
 /***********************Accounts****************************/
 
 
 
+
+
+/***********************Booking****************************/
+
+
+
+/***********************Booing****************************/
 
 
 

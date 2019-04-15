@@ -6,6 +6,7 @@ int main()
 {
     //printf("Random: %ld",ran(10000000,10000000000));
 
+    DeleteArtiste();
     Welcome();
 
     if(file_exists(UserFileName) == 0){
