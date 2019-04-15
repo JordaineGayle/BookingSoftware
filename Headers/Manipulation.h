@@ -662,6 +662,4 @@ void DeleteBooking(){
 void UpdateBooking() {
 }
 
-
-
 #endif // MANIPULATION_H_INCLUDED
