@@ -6,8 +6,15 @@ int main()
 {
     //printf("Random: %ld",ran(10000000,10000000000));
 
-    DeleteArtiste();
+    //DeleteArtiste();
+    //DisplayArtiste();
+
+    //AddBooking();
+    //getch();
+    //DisplayBookings();
+	//printf("Current Year: %d\n\n",currentYear());
     Welcome();
+    DisplayBookings();
 
     if(file_exists(UserFileName) == 0){
 

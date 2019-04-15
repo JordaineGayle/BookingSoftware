@@ -32,8 +32,12 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Headers/DATAManipulation.h" />
+		<Unit filename="Headers/Display.h" />
 		<Unit filename="Headers/Functions.h" />
 		<Unit filename="Headers/Helpers.h" />
+		<Unit filename="Headers/Manipulation.h" />
+		<Unit filename="Headers/Reports.h" />
+		<Unit filename="Headers/Search.h" />
 		<Unit filename="Headers/Structures.h" />
 		<Unit filename="Headers/Variables.h" />
 		<Unit filename="main.c">

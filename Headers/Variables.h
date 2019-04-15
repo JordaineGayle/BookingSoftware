@@ -1,6 +1,6 @@
 #ifndef VARIABLES_H_INCLUDED
 #define VARIABLES_H_INCLUDED
-
+#include "Structures.h"
 
 char * UserFileName = "Database/User/User.dat";
 char * ArtisteFileName = "Database/Artiste/Artiste.dat";
@@ -14,4 +14,5 @@ char * ActivityFileName = "Database/Log/Logs.txt";
 int recordCounter = 0;
 int recordExist = 0;
 UserType globalUser;
+int LoggedInUser;
 #endif // VARIABLES_H_INCLUDED

@@ -60,63 +60,24 @@ int CreateUser(User user, char *path, char *mode){
 }
 
 
-char * CreateBooking(Booking booking, char *path, char *mode){
+int CreateBooking(Booking booking, char *path, char *mode){
 
-    recordCounter = 0;
+    Sleep(100);
 
-    //file pointer
-    FILE * book = NULL;
+    FILE * fp;
 
-    //opening the file
-    book = fopen(path,mode);
+    fp = fopen(path,mode);
 
-    //creating an instance of the Artiste structure to model data
-    Booking bObj;
+    fseek(fp, booking.Id, SEEK_SET);
 
-    while(!feof(book)){
-
-        //setting back the recordExist flag 0 on each run
-        recordExist = 0;
-
-        //reading data from file and sending it to struct
-        fread(&bObj,sizeof(bObj),1,book);
-
-        //check if the stageName sent in matches the stageName in the file and also Id
-        if( (bObj.ArtisteId == booking.ArtisteId) && (bObj.DateBooked == booking.DateBooked)){
-
-            //setting recordExist to one if record exist
-            recordExist = 1;
-
-            //recordCounter++;
-            break;
-        }
-
-        if( (bObj.ArtisteId == booking.ArtisteId) && (bObj.DateBooked == booking.DateBooked)){
-
-           //checking the number of records in the file
-           recordCounter++;
-
-        }
-
+    if(fwrite(&booking, sizeof(booking),1,fp)){
+        fclose(fp);
+        return 3;
     }
 
-    //checking if the recordCounter is less than or equal to three
-    if(recordCounter <= 15 && recordExist == 0){
+    fclose(fp);
 
-        //writing user data from a user structure to the file
-        fwrite(&booking, sizeof(booking),1,book);
-
-        //return a message if data was added successfully
-        return "Record Created Successfully!";
-
-    }else if(recordCounter <= 15 && recordExist == 1){ //checking if the RecordExist and return message
-        return "Booking Already Exist"; //tell the worker the record exist
-    }else{
-        return "Booking For Artiste is full"; //telling the worker that no more records can be entered
-    }
-
-    //closing back the user file
-    fclose(book);
+    return -1;
 }
 
 
@@ -221,8 +182,6 @@ int CreateAccount(Accounts account, char *path, char *mode){
 		int accountExist = AccountExist(account.AccountInfo.AccountNum);
 
 		if (accountExist > -1) {
-
-			//int foundationId = (FoundationList() + foundationExist)->Id;
 
 			return 2; //already There
 		}

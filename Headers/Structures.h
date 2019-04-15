@@ -4,6 +4,13 @@
 typedef enum {Manager = 1, Clerk} UserType;
 typedef enum  {GeneralReports, ArtisteReports, FoundationReports} ReportAction;
 typedef enum {ArtisteAccount, FoundationAccount} AccountTypes;
+typedef enum {zero,one}Binary;
+
+typedef struct{
+    int day;
+    int month;
+    int year;
+}Date;
 
 //User Database
 typedef struct{
@@ -56,26 +63,31 @@ typedef struct{
 
 
 typedef struct{
- char HotelInfo;
+ char HotelInfo[100];
  float HotelCharge;
- char FlightInfo;
+ char FlightInfo[100];
  float PlaneFare;
  int NumberOfPersons;
 }AdditionalInfo;
 
+typedef struct{
+	float local;
+	float overseas;
+}Rate;
 
 //Booking Database
 typedef struct{
  int Id; //not entering
  int ArtisteId; //not entering
  int BookingNumber; //not entering
- char Type; //O,V,L
- int DateBooked; //not entering
+ char Type; //O,L
+ Date DateBooked; //not entering
  int EmployeeId; //not entering
- char Location;
- char Guide;
+ char Location[100];
+ char Guide[100];
  char PromoterName[100];
- float Rate;
+ Rate Rate;
+ int IsVoluntary;
  AdditionalInfo Info;
 }Booking;
 

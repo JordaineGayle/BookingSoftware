@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Database",
     "\\Headers"
   ],
-  "SelectedNode": "\\main.c",
+  "SelectedNode": "\\Headers\\Functions.h",
   "PreviewInSolutionExplorer": false
 }
