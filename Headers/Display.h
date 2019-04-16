@@ -112,4 +112,9 @@ void DisplayFoundation(){
     }
 }
 
+
+
+
+void DisplaySavedReports(){
+}
 #endif // DISPLAY_H_INCLUDED

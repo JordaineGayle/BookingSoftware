@@ -19,35 +19,21 @@ void SearchArtisteById(int Id){
 
 }
 
-void SearchArtisteByUsername(char * uname){
+void SearchArtisteByStageName(char * uname){
 
 }
 
-void SearchArtisteByName(char * fname){
+void SearchFoundationById(char * fname){
 
 }
 
-void SearchArtisteByName(char * fname){
-
-}
-
-
-
-void SearchUserById(int Id){
-
-}
-
-void SearchUserByUsername(char * uname){
-
-}
-
-void SearchUserByName(char * fname){
+void SearchFoundationByDateFounded(char * fname){
 
 }
 
 
 
-void SearchUserById(int Id){
+void SearchBookingByBookingNumber(int Id){
 
 }
 
@@ -55,8 +41,19 @@ void SearchUserByUsername(char * uname){
 
 }
 
-void SearchUserByName(char * fname){
+void SearchBookingByArtisteId(char * fname){
 
 }
+
+
+
+void SearchBookingByPromoterName(int Id){
+
+}
+
+void SearchBookingByEmployeeId(char * uname){
+
+}
+
 
 #endif // SEARCH_H_INCLUDED
