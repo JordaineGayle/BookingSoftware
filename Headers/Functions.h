@@ -288,7 +288,7 @@ void MenuReport(){
     st();st();
     printf("\n\n\t\t\t\t*Please Select a Option Below*\n\n");
 
-    printf(" a). Artiste Yearly Earning Report\n b). Foundation Revenue Report\n c). Generate Invoice\n d). Main Menu\n e). Exit");
+    printf(" a). Artiste Yearly Earning Report\n b). Generate Invoice\n d). Main Menu\n e). Exit");
 
 
     st();st();

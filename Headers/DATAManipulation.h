@@ -218,50 +218,16 @@ int CreateAccount(Accounts account, char *path, char *mode){
 }
 
 
-char * ArtisteRep(ArtisteReport report, char *path, char *mode){
+void CreateReport(Report report){
 
-    FILE * aReport = NULL;
+    //Create a pointer tot a file and assign the value null to it
+    FILE * rp = NULL;
 
-    aReport = fopen(path,mode);
+    rp = fopen(ReportFileName,"ab+");
 
-    fprintf(aReport,"Id\tArtisteId\tYearly Earnings\n%d\t%d\t%.2f\t%s\n****************************************************************\n\n",report.Id,report.ArtisteId,report.YearlyEarnings,report.Date);
+    fprintf(rp, "%d %s %.2f %s %s", report.ArtisteId, report.ArtisteStageName, report.FoundationRevenue, report.Charity, report.DateOfReport);
 
-    fclose(aReport);
-
-    return "Record Created Successfully!";
-
-}
-
-char * FoundationRep(FoundationReport report, char *path, char *mode){
-    //file pointer
-    FILE * fReport = NULL;
-
-    //opening the file
-    fReport = fopen(path,mode);
-
-    fprintf(fReport,"Id\tFoundationId\tMajor Charity\tYearly Earnings\n%d\t%d\t%s\t%.2f\t%s\n****************************************************************\n\n",report.Id,report.FoundationId,report.CurrentMajorCharity,report.Revenue,report.Date);
-
-    fclose(fReport);
-
-    return "Record Created Successfully!";
-}
-
-char * GeneralRep(GeneralReport report, char *path, char *mode){
-    //file pointer
-    FILE *gReport = NULL;
-
-    //opening the file
-    gReport = fopen(path,mode);
-
-    fprintf(gReport,"Id\tArtisteId\tYearly Earnings\n%d\t%d\t%.2f\t%s\n",report.ArtisteReport.Id,report.ArtisteReport.ArtisteId,report.ArtisteReport.YearlyEarnings,report.ArtisteReport.Date);
-
-    fprintf(gReport,"Id\tFoundationId\tMajor Charity\tYearly Earnings\n%d\t%d\t%s\t%.2f\t%s\n****************************************************************\n\n",report.FoundationReport.Id,report.FoundationReport.FoundationId,report.FoundationReport.CurrentMajorCharity,report.FoundationReport.Revenue,report.FoundationReport.Date);
-
-    fclose(gReport);
-
-
-
-    return "Record Created Successfully!";
+    close(rp);
 
 }
 
@@ -273,7 +239,7 @@ void AddLog(ActivityLog log,char *path, char *mode){
     logs = fopen(path,mode);
 
     //writing ActivityLog data from a ActivityLog structure to the file
-    fprintf(logs,"UserId: %d\nDescription: %s\nDate: %s\n*****************************************\n\n",log.UserId,log.Description,log.Date);
+    fprintf(logs,"\n\nUserId: %d\nDescription: %s\nDate: %s\n*****************************************\n\n",log.UserId,log.Description,log.Date);
 
 
     //closing back the user file

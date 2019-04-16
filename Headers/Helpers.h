@@ -2,6 +2,8 @@
 #define HELPERS_H_INCLUDED
 #include <string.h>
 #include "Variables.h"
+void AddLog(ActivityLog, char*, char*);
+
 
 int file_exists(char * filename)
 {
@@ -1236,7 +1238,49 @@ int BookingCountPerArtiste(int ArtisteId){
 void ArtisteYearlyReport(){
 
 
+    if(file_exists(ArtisteFileName) == 0){
 
+        int countedA = ArtisteCount();
+
+        if(countedA > 0){
+
+            Artiste * aPtr = ArtisteList();
+
+            int artisteIds[countedA];
+
+            Report reports[countedA];
+
+            for(int x = 0; x < countedA; x++){
+                artisteIds[x] = (aPtr+x)->ArtisteId;
+            }
+
+            for(for in x = 0; x < countedA; x++){
+
+                Booking * bPtr = QueryBookingByArtisteId(artisteIds[x]);
+
+                for(int i = 0; i < ListPos; i++){
+
+                    if( (bPtr+i)->Type == 'L' || (bPtr+i)->Type == 'l' ){
+
+                    }else{
+
+                    }
+                    reports[x].FoundationRevenue
+                }
+
+            }
+
+
+        }else{
+
+            printf("\n\n#ERROR# -> No Artiste In System To Conduct A Report [Empty File Error]\n\n");
+        }
+
+    }else{
+        printf("\n\n#ERROR# -> No Artiste In System To Conduct A Report [Empty File Error]\n\n");
+    }
+
+    MenuReport();
 }
 
 /****************************Dedicated Function**********************/

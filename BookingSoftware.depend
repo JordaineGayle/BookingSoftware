@@ -68,14 +68,14 @@
 	<stdlib.h>
 	"Headers/Functions.h"
 
-1555440477 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\functions.h
+1555442912 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\functions.h
 	<time.h>
 	<ctype.h>
 	<conio.h>
 	"Manipulation.h"
 	"Search.h"
 
-1555425618 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\datamanipulation.h
+1555444809 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\datamanipulation.h
 	<stdio.h>
 	<stdlib.h>
 	<strings.h>
@@ -83,19 +83,20 @@
 	<string.h>
 	"Helpers.h"
 
-1555439633 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\helpers.h
+1555444770 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\helpers.h
 	<string.h>
 	"Variables.h"
 
-1555430252 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\variables.h
+1555444798 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\variables.h
+	<time.h>
 	"Structures.h"
 
-1555425806 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\structures.h
+1555443378 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\structures.h
 
 1555425618 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\display.h
 	"Helpers.h"
 
-1555425618 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\manipulation.h
+1555446114 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\manipulation.h
 	"DATAManipulation.h"
 	"Display.h"
 	"Functions.h"

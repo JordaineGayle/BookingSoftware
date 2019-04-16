@@ -92,39 +92,6 @@ typedef struct{
 }Booking;
 
 
-typedef struct{
- int ReportId;
- char *FileName;
- int LastModified;
-}SavedReports;
-
-typedef struct{
- int Id;
- int ArtisteId;
- float YearlyEarnings;
- char Date[50];
-}ArtisteReport;
-
-typedef struct{
- int Id;
- int FoundationId;
- float Revenue;
- char CurrentMajorCharity[100];
- char Date[100];
-}FoundationReport;
-
-typedef struct{
-  int Id;
-  ArtisteReport ArtisteReport;
-  FoundationReport FoundationReport;
-}GeneralReport;
-
-union ReportResults{
- GeneralReport GeneralReport[20];
- ArtisteReport ArtisteReport[20];
- FoundationReport FoundationReport[20];
-};
-
 //Logs Database
 typedef struct{
  int UserId;
@@ -143,8 +110,14 @@ typedef struct{
 
 typedef struct{
     int Id;
-    char Name[100];
-}Promoter;
+    int ArtisteId;
+    char * ArtisteStageName;
+    float FoundationRevenue;
+    char * Charity;
+    char * DateOfReport;
+}Report;
+
+
 
 
 

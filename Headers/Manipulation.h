@@ -535,7 +535,7 @@ void DeleteArtiste() {
 
     if(totalArtiste <= 0){
         printf("\n#ERROR# -> Sorry No Artiste Created To Delete [No Artiste Created]\n");
-        DeleteArtiste();
+        MenuDelete(globalUser);
     }else{
 
     char selection[40];
@@ -654,8 +654,9 @@ void DeleteArtiste() {
 		printf("\n#ERROR# -> Failed To Delete Artiste [Doesn't Exist]\n");
 	}
 
-	DeleteArtiste();
+
     }
+    DeleteArtiste();
 }
 
 
@@ -1086,6 +1087,8 @@ void DeleteBooking(){
         }
 
     }
+
+    DeleteBooking();
 }
 
 
@@ -1106,7 +1109,7 @@ void UpdateUser(){
     if(selection==-1){
             exitProgram();
         }else if(selection==-2){
-            MenuA(globalUser);
+            MenuB(globalUser);
         }else if(selection==-3){
             Menu(globalUser);
         }
@@ -1212,8 +1215,9 @@ void UpdateUser(){
 
     }else{
         printf("\n#ERROR# -> Error User Doesn't Exist [Out Of Bound Index]\n");
-        UpdateUser();
     }
+
+    UpdateUser();
 }
 
 void UpdateBooking() {
@@ -1238,7 +1242,7 @@ void UpdateBooking() {
         exitProgram();
     }else if(selection == -2){
         if(globalUser == Manager){
-            MenuDelete(globalUser);
+            updateMenu();
         }else{
             Menu(globalUser);
         }
@@ -1577,8 +1581,9 @@ void UpdateBooking() {
 
     }else{
         printf("\n#ERROR# -> Error Booking Doesn't Exist [Out Of Bound Index]\n");
-        UpdateBooking();
     }
+
+    UpdateBooking();
 }
 
 void UpdateFoundation(){
@@ -1587,9 +1592,31 @@ void UpdateFoundation(){
 
     DisplayFoundation();
 
+    if(globalUser == Manager){
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n");
+        printf(" * -3 Main Menu * \n\n");
+    }else{
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n\n");
+    }
+
     printf(" Select Foundation Id To Update: ");
 
     scanf("%d", &selection);
+       if(selection == -1){
+        exitProgram();
+    }else if(selection == -2){
+        if(globalUser == Manager){
+            updateMenu();
+        }else{
+            Menu(globalUser);
+        }
+
+    }else if(selection == -3){
+        Menu(globalUser);
+    }
+
 
     int exist = FoundationExistById(selection);
 
@@ -1671,8 +1698,9 @@ void UpdateFoundation(){
 
     }else{
         printf("\n#ERROR# -> Error Foundation Doesn't Exist [Out Of Bound Index]\n");
-        UpdateFoundation();
     }
+
+     UpdateFoundation();
 }
 
 void UpdateArtiste() {
@@ -1681,10 +1709,30 @@ void UpdateArtiste() {
 
     DisplayArtiste();
 
+    if(globalUser == Manager){
+        printf("\n\n * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n");
+        printf(" * -3 Main Menu * \n\n");
+    }else{
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n\n");
+    }
+
     printf(" Select Artiste Id To Update: ");
 
     scanf("%d", &selection);
+       if(selection == -1){
+        exitProgram();
+    }else if(selection == -2){
+        if(globalUser == Manager){
+            updateMenu();
+        }else{
+            Menu(globalUser);
+        }
 
+    }else if(selection == -3){
+        Menu(globalUser);
+    }
     int exist = ArtisteExistById(selection);
 
     if(exist > -1){
@@ -1777,8 +1825,9 @@ void UpdateArtiste() {
 
     }else{
         printf("\n#ERROR# -> Error Artiste Doesn't Exist [Out Of Bound Index]\n");
-        UpdateArtiste();
     }
+
+    UpdateArtiste();
 
 }
 
@@ -1791,9 +1840,27 @@ void updateMenu(){
     fflush(stdin);
     printf(" a). Artiste Information\n b). Foundation\n c). Booking\n\n");
 
+    if(globalUser == Manager){
+        printf(" * 1 Exit Program * \n");
+        printf(" * 2 Prevoius Menu * \n");
+        printf(" * 3 Main Menu * \n\n");
+    }
+
+
     fflush(stdin);
     printf(" Enter Option: ");
     scanf("%c",&selection);
+
+    if(globalUser == Manager){
+        if(selection == '1'){
+            exitProgram();
+        }else if(selection == '2'){
+            MenuB(globalUser);
+        }else if(selection == '3'){
+            Menu(globalUser);
+        }
+    }
+
 
     if(selection == 'a' || selection == 'A'){
         UpdateArtiste();
