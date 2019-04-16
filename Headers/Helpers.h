@@ -4,6 +4,16 @@
 #include "Variables.h"
 void AddLog(ActivityLog, char*, char*);
 
+void MenuReport();
+
+void CreateReport(Report report);
+
+void exitProgram();
+
+void DisplayBookings();
+
+void Menu(int);
+
 
 int file_exists(char * filename)
 {
@@ -1244,30 +1254,65 @@ void ArtisteYearlyReport(){
 
         if(countedA > 0){
 
+            printf("\n\n\tArtisteId\tStageName\tFRevenue\tCharity\t\tDateOfReport\n\n");
+
             Artiste * aPtr = ArtisteList();
 
             int artisteIds[countedA];
 
             Report reports[countedA];
 
+            int added = 0;
+
             for(int x = 0; x < countedA; x++){
-                artisteIds[x] = (aPtr+x)->ArtisteId;
+                artisteIds[x] = (aPtr+x)->Id;
             }
 
-            for(for in x = 0; x < countedA; x++){
+            for(int x = 0; x < countedA; x++){
 
                 Booking * bPtr = QueryBookingByArtisteId(artisteIds[x]);
 
-                for(int i = 0; i < ListPos; i++){
+                if(bPtr == NULL){
+                    continue;
+                }else{
+                    for(int i = 0; i < ListPos; i++){
 
-                    if( (bPtr+i)->Type == 'L' || (bPtr+i)->Type == 'l' ){
+                    if( DateCompare(currentDate(), (bPtr+i)->DateBooked) == 1 && (bPtr+i)->DateBooked.year == currentYear()){
+                        if( (bPtr+i)->Type == 'L' || (bPtr+i)->Type == 'l' ){
 
-                    }else{
-
+                            if((bPtr+i)->Rate.local)
+                            reports[added].FoundationRevenue+=(bPtr+i)->Rate.local;
+                        }else{
+                            reports[added].FoundationRevenue+=(bPtr+i)->Rate.overseas;
+                        }
                     }
-                    reports[x].FoundationRevenue
                 }
 
+                ListPos = 0;
+
+                int snIndex = ArtisteExistById(artisteIds[x]);
+
+                reports[added].ArtisteId = artisteIds[x];
+
+                reports[added].ArtisteStageName = (ArtisteList()+snIndex)->StageName;
+
+                reports[added].Charity = (FoundationList()+snIndex)->MajorityCurCharity;
+
+                time_t mytime;
+
+                mytime = time(NULL);
+
+                reports[added].DateOfReport = ctime(&mytime);
+
+                fflush(stdin);
+                printf("\t%-2d\t\t%s\t\t%.2f\t\t%s\t\t%s\n\n",reports[x].ArtisteId, reports[x].ArtisteStageName, reports[x].FoundationRevenue, reports[x].Charity, reports[x].DateOfReport);
+                }
+                added++;
+            }
+
+
+            for(int k = 0; k < added; k++){
+                CreateReport(reports[k]);
             }
 
 
@@ -1283,6 +1328,89 @@ void ArtisteYearlyReport(){
     MenuReport();
 }
 
+
+void GenerateInvoice(){
+
+    DisplayBookings();
+
+    printf("\n * -1 Exit Program * \n");
+    printf(" * -2 Prevoius Menu * \n");
+    printf(" * -3 Main Menu * \n\n");
+
+    printf("\n\nCreating Invoice For Promoter\n\n");
+
+
+    int id;
+
+    char pname[100];
+
+    fflush(stdin);
+    printf("Enter Artiste Id");
+    scanf("%d",&id);
+    while(ArtisteExistById(id) < 0){
+        fflush(stdin);
+        printf("\n#ERROR# -> Enter A Valid Artiste Id");
+        printf("Enter Artiste Id");
+        scanf("%d",&id);
+    }
+    if(id == -1){
+        exitProgram();
+    }else if(id == -2){
+        MenuReport();
+    }else if(id == -3){
+        Menu(globalUser);
+    }
+    fflush(stdin);
+    printf("\nEnter Promoter Name: ");
+    gets(pname);
+    if( strcmpi(pname, "-1") == 0 ){
+        exitProgram();
+    }else if(strcmpi(pname, "-2") == 0){
+        MenuReport();
+    }else if(strcmpi(pname, "-3") == 0){
+        Menu(globalUser);
+    }
+
+    Booking *bPtr = QueryBookingByArtisteId(id);
+
+    for(int x = 0; x < ListPos; x++){
+
+        if(strcmpi(pname, (bPtr+x)->PromoterName) == 0){
+
+            time_t mytime;
+
+            mytime = time(NULL);
+
+            char *ext = ".txt";
+            char dt[100];
+
+
+            strcat(ctime(&mytime), dt);
+
+            strcat(ext,dt);
+
+            FILE * fp = fopen("ab.txt","a+");
+
+            fprintf(fp,"InvoiceId\tDate\tDescription\tAmountShows\tArtisteName\tGrandTotal\n\n");
+
+            if((bPtr+x)->Type == 'l' || (bPtr+x)->Type == 'L'){
+                fprintf(fp, "%ld\t%s\t%d\t%d\t%.2f\n\n",randAccNum(10000,90000),ctime(&mytime),ListPos,(bPtr+x)->ArtisteId,(bPtr+x)->Rate.local);
+            }else{
+                fprintf(fp, "%ld\t%s\t%d\t%d\t%.2f\n\n",randAccNum(10000,90000),ctime(&mytime),ListPos,(bPtr+x)->ArtisteId,(bPtr+x)->Rate.overseas);
+            }
+
+            fclose(fp);
+
+            printf("\n\nCheck Folder Database/Invoice/DateInvoiceGenerated.txt to see invoice\n\n");
+
+        }
+
+    }
+
+
+    GenerateInvoice();
+
+}
 /****************************Dedicated Function**********************/
 
 

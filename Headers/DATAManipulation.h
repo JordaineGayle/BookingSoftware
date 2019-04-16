@@ -223,12 +223,18 @@ void CreateReport(Report report){
     //Create a pointer tot a file and assign the value null to it
     FILE * rp = NULL;
 
-    rp = fopen(ReportFileName,"ab+");
+    rp = fopen(ReportFileName,"a+");
 
-    fprintf(rp, "%d %s %.2f %s %s", report.ArtisteId, report.ArtisteStageName, report.FoundationRevenue, report.Charity, report.DateOfReport);
 
-    close(rp);
+    if(fprintf(rp, "%d %s %.2f %s %s\n\n", report.ArtisteId, report.ArtisteStageName, report.FoundationRevenue, report.Charity, report.DateOfReport)){
+        //printf("\n\nRecord Added Successfully!\n\n");
+    }else{
+         printf("\n\nFailed To Add Records!\n\n");
+    }
 
+    fclose(rp);
+
+    //Sleep(200);
 }
 
 void AddLog(ActivityLog log,char *path, char *mode){

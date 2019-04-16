@@ -2,27 +2,105 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-<<<<<<< HEAD
-	<File name="Headers\Manipulation.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Headers\Structures.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="17260" topLine="0" />
+			<Cursor1 position="2170" topLine="99" />
+		</Cursor>
+	</File>
+	<File name="Headers\Variables.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="416" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Headers\DATAManipulation.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4211" topLine="219" />
+		</Cursor>
+	</File>
+	<File name="Headers\Functions.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8700" topLine="30" />
+		</Cursor>
+		<Folding>
+			<Collapse line="14" />
+			<Collapse line="77" />
+			<Collapse line="135" />
+			<Collapse line="168" />
+		</Folding>
+	</File>
+	<File name="Headers\Helpers.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="26434" topLine="352" />
+		</Cursor>
+		<Folding>
+			<Collapse line="30" />
+			<Collapse line="220" />
+			<Collapse line="239" />
+			<Collapse line="298" />
+			<Collapse line="334" />
+			<Collapse line="364" />
+			<Collapse line="391" />
+			<Collapse line="424" />
+			<Collapse line="462" />
+			<Collapse line="492" />
+			<Collapse line="519" />
+			<Collapse line="546" />
+			<Collapse line="573" />
+			<Collapse line="602" />
+			<Collapse line="661" />
+			<Collapse line="699" />
+			<Collapse line="727" />
+			<Collapse line="754" />
+			<Collapse line="781" />
+			<Collapse line="822" />
+			<Collapse line="860" />
+			<Collapse line="888" />
+			<Collapse line="915" />
+			<Collapse line="942" />
+			<Collapse line="969" />
+			<Collapse line="1021" />
+			<Collapse line="1074" />
+			<Collapse line="1126" />
+			<Collapse line="1177" />
+			<Collapse line="1207" />
+			<Collapse line="1247" />
+		</Folding>
+	</File>
+	<File name="Headers\Manipulation.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="145" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="20" />
+			<Collapse line="154" />
+			<Collapse line="257" />
+			<Collapse line="533" />
+		</Folding>
+	</File>
+	<File name="Headers\Search.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3434" topLine="6" />
 		</Cursor>
 		<Folding>
 			<Collapse line="4" />
-			<Collapse line="83" />
-			<Collapse line="174" />
-			<Collapse line="333" />
-			<Collapse line="452" />
-			<Collapse line="457" />
-			<Collapse line="580" />
-			<Collapse line="661" />
+			<Collapse line="55" />
+			<Collapse line="110" />
+			<Collapse line="161" />
+			<Collapse line="212" />
+			<Collapse line="263" />
+			<Collapse line="321" />
+			<Collapse line="386" />
+			<Collapse line="454" />
+			<Collapse line="520" />
+			<Collapse line="587" />
 		</Folding>
 	</File>
-	<File name="Headers\Variables.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="726" topLine="0" />
-=======
-	<File name="Headers\Display.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+			<Cursor1 position="92" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="Headers\Display.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="170" topLine="0" />
 		</Cursor>
@@ -31,184 +109,5 @@
 			<Collapse line="85" />
 			<Collapse line="100" />
 		</Folding>
-	</File>
-	<File name="Headers\Functions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6070" topLine="45" />
->>>>>>> origin/master
-		</Cursor>
-		<Folding>
-			<Collapse line="14" />
-			<Collapse line="77" />
-			<Collapse line="107" />
-			<Collapse line="135" />
-			<Collapse line="206" />
-			<Collapse line="215" />
-			<Collapse line="282" />
-			<Collapse line="306" />
-		</Folding>
-	</File>
-<<<<<<< HEAD
-	<File name="Headers\Search.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="27" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2576" topLine="0" />
-=======
-	<File name="Headers\Variables.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="684" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Headers\DATAManipulation.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="240" topLine="0" />
->>>>>>> origin/master
-		</Cursor>
-	</File>
-	<File name="Headers\Helpers.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-<<<<<<< HEAD
-			<Cursor1 position="820" topLine="12" />
-		</Cursor>
-		<Folding>
-			<Collapse line="6" />
-			<Collapse line="43" />
-			<Collapse line="55" />
-			<Collapse line="70" />
-			<Collapse line="89" />
-			<Collapse line="127" />
-			<Collapse line="151" />
-			<Collapse line="176" />
-			<Collapse line="198" />
-			<Collapse line="234" />
-			<Collapse line="264" />
-			<Collapse line="291" />
-			<Collapse line="327" />
-			<Collapse line="366" />
-			<Collapse line="397" />
-			<Collapse line="425" />
-			<Collapse line="462" />
-			<Collapse line="500" />
-			<Collapse line="528" />
-			<Collapse line="556" />
-			<Collapse line="600" />
-			<Collapse line="640" />
-			<Collapse line="668" />
-			<Collapse line="695" />
-			<Collapse line="722" />
-			<Collapse line="749" />
-			<Collapse line="779" />
-=======
-			<Cursor1 position="1561" topLine="30" />
-		</Cursor>
-		<Folding>
-			<Collapse line="6" />
-			<Collapse line="18" />
-			<Collapse line="42" />
-			<Collapse line="53" />
-			<Collapse line="68" />
-			<Collapse line="125" />
-			<Collapse line="149" />
-			<Collapse line="174" />
-			<Collapse line="195" />
-			<Collapse line="231" />
-			<Collapse line="261" />
-			<Collapse line="288" />
-			<Collapse line="321" />
-			<Collapse line="359" />
-			<Collapse line="389" />
-			<Collapse line="416" />
-			<Collapse line="443" />
-			<Collapse line="478" />
-			<Collapse line="516" />
-			<Collapse line="544" />
-			<Collapse line="571" />
-			<Collapse line="598" />
-			<Collapse line="639" />
-			<Collapse line="677" />
-			<Collapse line="705" />
-			<Collapse line="732" />
-			<Collapse line="759" />
-			<Collapse line="786" />
-			<Collapse line="816" />
-			<Collapse line="875" />
->>>>>>> origin/master
-		</Folding>
-	</File>
-	<File name="Headers\Structures.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-<<<<<<< HEAD
-			<Cursor1 position="1556" topLine="35" />
-		</Cursor>
-	</File>
-	<File name="Headers\DATAManipulation.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="220" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="14" />
-			<Collapse line="62" />
-			<Collapse line="83" />
-			<Collapse line="132" />
-			<Collapse line="177" />
-			<Collapse line="221" />
-			<Collapse line="235" />
-			<Collapse line="249" />
-			<Collapse line="268" />
-		</Folding>
-	</File>
-	<File name="Headers\Display.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2718" topLine="38" />
-		</Cursor>
-		<Folding>
-			<Collapse line="76" />
-			<Collapse line="91" />
-		</Folding>
-	</File>
-	<File name="Headers\Functions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="144" topLine="0" />
-=======
-			<Cursor1 position="1160" topLine="33" />
-		</Cursor>
-	</File>
-	<File name="Headers\Manipulation.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="30858" topLine="12" />
-		</Cursor>
-		<Folding>
-			<Collapse line="18" />
-			<Collapse line="151" />
-			<Collapse line="253" />
-			<Collapse line="528" />
-			<Collapse line="658" />
-			<Collapse line="992" />
-			<Collapse line="1086" />
-			<Collapse line="1212" />
-			<Collapse line="1576" />
-			<Collapse line="1669" />
-			<Collapse line="1775" />
-		</Folding>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="71" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Headers\Reports.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="228" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Headers\Search.h" open="1" top="1" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1365" topLine="31" />
->>>>>>> origin/master
-		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -16,6 +16,8 @@ void MenuSearch();
 
 void MenuDelete(int);
 
+void updateMenu();
+
 void AddUser(int firstTime){
 
     User newuser;

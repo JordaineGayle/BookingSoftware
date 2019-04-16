@@ -288,12 +288,29 @@ void MenuReport(){
     st();st();
     printf("\n\n\t\t\t\t*Please Select a Option Below*\n\n");
 
-    printf(" a). Artiste Yearly Earning Report\n b). Generate Invoice\n d). Main Menu\n e). Exit");
+    printf(" a). Artiste Yearly Earning Report\n b). Generate Invoice\n c). Main Menu\n d). Exit");
 
+    char selection;
+    fflush(stdin);
+    printf("\n Enter Option: ");
+    scanf("%c", &selection);
 
     st();st();
     nl(2);
 
+    if(selection == 'a' || selection == 'A'){
+        ArtisteYearlyReport();
+    }else if(selection == 'b' || selection == 'B'){
+        GenerateInvoice();
+    }else if(selection == 'C' || selection == 'c'){
+        Menu(globalUser);
+    }else if(selection == 'D' || selection == 'd'){
+        exitProgram();
+    }else{
+        printf("\n\n#ERROR# -> Invalid Option Selected\n\n");
+    }
+
+    MenuReport();
 
 }
 

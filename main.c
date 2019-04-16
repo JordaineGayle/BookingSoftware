@@ -5,6 +5,8 @@
 int main()
 {
 
+ArtisteYearlyReport();
+
     Welcome();
 
     if(file_exists(UserFileName) == 0){
