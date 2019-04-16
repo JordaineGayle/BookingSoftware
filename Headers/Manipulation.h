@@ -2,39 +2,80 @@
 #define MANIPULATION_H_INCLUDED
 #include "DATAManipulation.h"
 #include "Display.h"
+
 void AddUser(int firstTime){
 
     User newuser;
 
     char utype;
 
-    printf("\nAdd A System User\n");
+    printf("\n\n *Add A System User*\n\n");
+
+    printf(" * -1 Exit Program* \n");
+    printf(" * -2 Prevoius Menu* \n");
+    printf(" * -3 Main Menu* \n\n");
 
     newuser.Id = UserDataCount()+1;
 
     fflush(stdin);
     printf("Enter First Name: ");
     gets(newuser.FirstName);
+    if(strcmpi(newuser.FirstName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(newuser.FirstName,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(newuser.FirstName,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\nEnter Last Name: ");
     gets(newuser.LastName);
+    if(strcmpi(newuser.FirstName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(newuser.FirstName,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(newuser.FirstName,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\nEnter System Username: ");
     gets(newuser.Username);
+    if(strcmpi(newuser.Username,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(newuser.Username,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(newuser.Username,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\nEnter System Password: ");
     gets(newuser.Password);
+    if(strcmpi(newuser.Password,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(newuser.Password,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(newuser.Password,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\nEnter Address: ");
     gets(newuser.Address);
+    if(strcmpi(newuser.Address,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(newuser.Address,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(newuser.Address,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\nSelect User Type (M - Manager, C - Clerk): ");
     scanf("%c", &utype);
+
 
     while(firstTime == 1 && (utype != 'm' || utype != 'M') ){
 
@@ -78,7 +119,7 @@ void AddUser(int firstTime){
         printf("\nAn Error Has Occurred\n");
     }
 
-    //AddUser();
+    AddUser(0);
 }
 
 void DeleteUser(){
@@ -86,6 +127,10 @@ void DeleteUser(){
     int selection;
 
     printf("\nDelete A user\n\n");
+
+    printf(" * -1 Exit Program* \n");
+    printf(" * -2 Prevoius Menu* \n");
+    printf(" * -3 Main Menu* \n\n");
 
     printf("\tId\tUsername\tFirstname\tLastname\tUserType\tAddress\t\tDateJoined\n\n");
 
@@ -105,6 +150,13 @@ void DeleteUser(){
 
     printf("Select Id Of User To Delete: ");
     scanf("%d", &selection);
+    if(selection == -1){
+        exitProgram();
+    }else if(selection == -2){
+        MenuDelete(globalUser);
+    }else if(selection == -3){
+        Menu(globalUser);
+    }
 
 
     int exist = UserExist(selection);
@@ -182,7 +234,11 @@ void AddArtiste() {
 
 	Accounts fAccount;
 
-	printf("\n Add An Artiste\n\n");
+	printf("\n *Add An Artiste*\n\n");
+
+	printf(" * -1 Exit Program * \n");
+    printf(" * -2 Prevoius Menu * \n");
+    printf(" * -3 Main Menu * \n\n");
 
 	aAccount.Id = AccountsCount() + 1;
 	fAccount.Id = aAccount.Id+1;
@@ -193,50 +249,120 @@ void AddArtiste() {
 
 	printf("*********************************************\n");
 
-	printf(" Artiste Info\n\n");
+	printf(" *Artiste Info*\n\n");
 
 	fflush(stdin);
 	printf(" Enter Artiste's Stage Name: ");
 	gets(artiste.StageName);
+	if(strcmpi(artiste.StageName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.StageName,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.StageName,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	while (ArtisteExist(artiste.StageName) > -1) {
         fflush(stdin);
 		printf("\n#ERROR# -> Artiste Name Already Taken [StageName Error]\n");
 		printf(" Enter Artiste's Stage Name: ");
 		gets(artiste.StageName);
+		if(strcmpi(artiste.StageName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.StageName,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.StageName,"-3") == 0){
+        Menu(globalUser);
+    }
 	}
 
     fflush(stdin);
 	printf("\n Enter Artiste's Firstname: ");
 	gets(artiste.FirstName);
+	if(strcmpi(artiste.FirstName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.FirstName,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.FirstName,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's Lastname: ");
 	gets(artiste.LastName);
+	if(strcmpi(artiste.LastName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.LastName,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.LastName,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's Telephone#: "); //remeber to add back the quote
 	gets(artiste.TelephoneNumber);
+	if(strcmpi(artiste.TelephoneNumber,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.TelephoneNumber,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.TelephoneNumber,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's PhysicalAddress: ");
 	gets(artiste.PhysicalAddress);
+	if(strcmpi(artiste.PhysicalAddress,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.PhysicalAddress,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.PhysicalAddress,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's Email: ");
 	gets(artiste.Email);
+	if(strcmpi(artiste.Email,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.Email,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.Email,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's Genre: ");
 	gets(artiste.Genre);
+	if(strcmpi(artiste.Genre,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(artiste.Genre,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(artiste.Genre,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's Account Balance: ");
 	scanf("%f",&aAccount.AccountInfo.AccountBalance);
+	if(aAccount.AccountInfo.AccountBalance == -1){
+        exitProgram();
+    }else if(aAccount.AccountInfo.AccountBalance == -2){
+        MenuA(globalUser);
+    }else if(aAccount.AccountInfo.AccountBalance == -3){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Artiste's Yearly Earnings: ");
     scanf("%f",&artiste.YearlyEarnings);
+    if(artiste.YearlyEarnings == -1){
+        exitProgram();
+    }else if(artiste.YearlyEarnings == -2){
+        MenuA(globalUser);
+    }else if(artiste.YearlyEarnings == -3){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
 	printf("\n\n*********************************************\n");
@@ -246,29 +372,71 @@ void AddArtiste() {
 	fflush(stdin);
 	printf(" Enter Foundation Name: ");
 	gets(foundation.NameOfFoundation);
+	if(strcmpi(foundation.NameOfFoundation,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(foundation.NameOfFoundation,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(foundation.NameOfFoundation,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	while (FoundationExist(foundation.NameOfFoundation) > -1) {
 		fflush(stdin);
 		printf("\n#ERROR# -> Foundation Azlready Exist [FoundationName Error]\n");
 		printf(" Enter Foundation Name: ");
 		gets(foundation.NameOfFoundation);
+		if(strcmpi(foundation.NameOfFoundation,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(foundation.NameOfFoundation,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(foundation.NameOfFoundation,"-3") == 0){
+        Menu(globalUser);
+    }
 	}
 
 	fflush(stdin);
 	printf("\n Enter Foundation Address: ");
 	gets(foundation.Address);
+	if(strcmpi(foundation.Address,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(foundation.Address,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(foundation.Address,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Foundation Year Founded: ");
 	scanf("%d",&foundation.YearFounded);
+	if(foundation.YearFounded == -1){
+        exitProgram();
+    }else if(foundation.YearFounded == -2){
+        MenuA(globalUser);
+    }else if(foundation.YearFounded == -3){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Foundation Employee Total: ");
 	scanf("%d",&foundation.NumberOfEmployees);
+	if(foundation.NumberOfEmployees == -1){
+        exitProgram();
+    }else if(foundation.NumberOfEmployees == -2){
+        MenuA(globalUser);
+    }else if(foundation.NumberOfEmployees == -3){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf("\n Enter Foundation Major Charity(Current) : ");
 	gets(foundation.MajorityCurCharity);
+	if(strcmpi(foundation.MajorityCurCharity,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(foundation.MajorityCurCharity,"-2") == 0){
+        MenuA(globalUser);
+    }else if(strcmpi(foundation.MajorityCurCharity,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	fflush(stdin);
 	printf(" \nEnter Foundation's Account Balance: ");
@@ -322,12 +490,12 @@ void AddArtiste() {
 				printf("\n#ERROR# -> An Unexpected Error Has Occured [Internal System Error]\n");
 			}
 
-			AddArtiste();
-
 		}
 
 
 	}
+
+	AddArtiste();
 
 }
 
@@ -337,13 +505,16 @@ void DeleteArtiste() {
 
     if(totalArtiste <= 0){
         printf("\n#ERROR# -> Sorry No Artiste Created To Delete [No Artiste Created]\n");
-        //MenuDelete(Manager);
-        //getch();
+        DeleteArtiste();
     }else{
 
-        char selection[40];
+    char selection[40];
 
 	printf("\nDelete A Artiste\n\n");
+
+	printf(" * -1 Exit Program* \n");
+    printf(" * -2 Prevoius Menu* \n");
+    printf(" * -3 Main Menu* \n\n");
 
 	printf("\tId\tStage Name\tFirstname\tLastName\tGenre\tYearly Earnings\t\tFoundation\n\n");
 
@@ -357,7 +528,14 @@ void DeleteArtiste() {
 
 	fflush(stdin);
 	printf("Select StageName Of Artiste To Delete: ");
-	gets(selection);
+	gets(selection)
+    if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
 
 	int exist = ArtisteExist(selection);
 
@@ -457,17 +635,35 @@ void AddBooking(){
 
     DisplayArtiste();
 
+    printf(" * -1 Exit Program * \n");
+    printf(" * -2 Prevoius Menu * \n");
+    printf(" * -3 Main Menu * \n\n");
+
     char voluntaryService;
 
     fflush(stdin);
     printf(" Enter ArtisteId: ");
     scanf("%d",&booking.ArtisteId);
+    if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
 
     while(ArtisteExistById(booking.ArtisteId) <= -1){
         fflush(stdin);
         printf("\n#ERROR# -> Artiste Doesn't Exist [ArtisteId Error]\n\n");
         printf(" Enter ArtisteId: ");
         scanf("%d",&booking.ArtisteId);
+        if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
     }
 
     fflush(stdin);
@@ -479,6 +675,13 @@ void AddBooking(){
         printf("\n#ERROR# -> Date Must Be Grater Than Today [Date Less]\n");
         printf("\n Enter A Valid Booking Date: ");
         scanf("%d/%d/%d", &booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
+        if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
     }
 
     while(BookingExist(booking.ArtisteId, booking.DateBooked) >= 0){
@@ -486,6 +689,13 @@ void AddBooking(){
         printf("\n#ERROR# -> Date Already Booked By You [ArtisteId Error]\n\n");
         printf("\n Enter A Valid Booking Date: ");
         scanf("%d/%d/%d",&booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
+        if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
     }
 
     while(BookingCountPerYear(booking.ArtisteId) >= 15){
@@ -493,36 +703,92 @@ void AddBooking(){
         printf("\n#ERROR# -> This Artiste Already Reached His Yearly Quota [Max Booking Per Year]\n");
         printf("\n Enter A Valid Booking Date: ");
         scanf("%d/%d/%d", &booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
+        if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
     }
 
 
     fflush(stdin);
     printf("\n Enter Booking Type: (O-Overseas | L-Local): ");
     scanf("%c",&booking.Type);
+    if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\n Booking Location: ");
     gets(booking.Location);
+    if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\n Guide: ");
     gets(booking.Guide);
+    if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\n Promoter Name: ");
     gets(booking.PromoterName);
+    if(strcmpi(selection,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(selection,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\n Local Rate: ");
     scanf("%f",&booking.Rate.local);
+    if(booking.Rate.local == -1){
+        exitProgram();
+    }else if(booking.Rate.local == -1){
+        MenuDelete(globalUser);
+    }else if(booking.Rate.local == -1){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\n International Rate: ");
     scanf("%f",&booking.Rate.overseas);
+    if(booking.Rate.overseas == -1){
+        exitProgram();
+    }else if(booking.Rate.overseas == -2){
+        MenuDelete(globalUser);
+    }else if(booking.Rate.overseas == -3){
+        Menu(globalUser);
+    }
 
     fflush(stdin);
     printf("\n Voluntary Service (Y/N): ");
     scanf("%c",&voluntaryService);
+    if(voluntaryService == '1'){
+        exitProgram();
+    }else if(voluntaryService == '2'){
+        MenuDelete(globalUser);
+    }else if(voluntaryService == '3'){
+        Menu(globalUser);
+    }
 
     if(voluntaryService == 'y' || voluntaryService == 'Y'){
         booking.IsVoluntary = one; //true
@@ -535,22 +801,62 @@ void AddBooking(){
         fflush(stdin);
         printf("\n Hotel Name: ");
         gets(booking.Info.HotelInfo);
+        if(strcmpi(booking.Info.HotelInfo,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(booking.Info.HotelInfo,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(booking.Info.HotelInfo,"-3") == 0){
+        Menu(globalUser);
+    }
 
         fflush(stdin);
         printf("\n Cost of Hotel: ");
         scanf("%f",&booking.Info.HotelCharge);
+        if(strcmpi(booking.Info.HotelCharge,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(booking.Info.HotelCharge,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser)
+        }
+
+    }else if(strcmpi(selection,"-3") == 0){
+        Menu(booking.Info.FlightInfo);
+    }
 
         fflush(stdin);
         printf("\n Flight Origin State/Country - Destination State/Country: ");
         gets(booking.Info.FlightInfo);
+        if(strcmpi(booking.Info.FlightInfo,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(booking.Info.FlightInfo,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(booking.Info.FlightInfo,"-3") == 0){
+        Menu(globalUser);
+    }
 
         fflush(stdin);
         printf("\n Plane Fare: ");
         scanf("%f",&booking.Info.PlaneFare);
+        if(strcmpi(booking.Info.PlaneFare,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(booking.Info.PlaneFare,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(booking.Info.PlaneFare,"-3") == 0){
+        Menu(globalUser);
+    }
 
         fflush(stdin);
         printf("\n Number Of People: ");
         scanf("%d",&booking.Info.NumberOfPersons);
+        if(strcmpi(booking.Info.NumberOfPersons,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(booking.Info.NumberOfPersons,"-2") == 0){
+        MenuDelete(globalUser);
+    }else if(strcmpi(booking.Info.NumberOfPersons,"-3") == 0){
+        Menu(globalUser);
+    }
     }
 
     booking.Id = BookingCount()+1;
@@ -569,7 +875,7 @@ void AddBooking(){
         printf("\nFailed To Add Booking\n");
     }
 
-    //AddBooking();
+    AddBooking();
 
 
 }
@@ -578,10 +884,22 @@ void DeleteBooking(){
 
     DisplayBookings();
 
+    printf(" * -1 Exit Program* \n");
+    printf(" * -2 Prevoius Menu* \n");
+    printf(" * -3 Main Menu* \n\n");
+
     int selection;
 
-    printf("\nSelect Booking Id To Delete: ");
+    printf("\n Select Booking Id To Delete: ");
     scanf("%d",&selection);
+    if(selection == -1){
+        exitProgram();
+    }else if(selection == -2){
+        MenuDelete(globalUser);
+    }else if(selection == -3){
+        Menu(globalUser);
+    }
+
 
     int exist = BookingExistById(selection);
 
@@ -656,6 +974,77 @@ void DeleteBooking(){
 }
 
 
+void UpdateUser(){
+    int selection;
+
+    DisplayUsers();
+
+    printf(" Select User Id To Update: ");
+
+    scanf("%d", &selection);
+
+    int exist = UserExist(selection);
+
+    if(exist > -1){
+
+        int totalUsers = UserDataCount();
+
+        char utype;
+
+        User userArry[totalUsers];
+
+        User * ptr = ListOfUser();
+
+        for(int x = 0; x < totalUsers; x++){
+            userArry[x] = *(ptr+x);
+        }
+
+        fflush(stdin);
+        printf("Enter First Name: ");
+        gets(userArry[exist].FirstName);
+
+        fflush(stdin);
+        printf("\nEnter Last Name: ");
+        gets(userArry[exist].LastName);
+
+        fflush(stdin);
+        printf("\nEnter System Username: ");
+        gets(userArry[exist].Username);
+
+        fflush(stdin);
+        printf("\nEnter System Password: ");
+        gets(userArry[exist].Password);
+
+        fflush(stdin);
+        printf("\nEnter Address: ");
+        gets(userArry[exist].Address);
+
+        fflush(stdin);
+        printf("\nSelect User Type (M - Manager, C - Clerk): ");
+        scanf("%c", &utype);
+
+
+        if(utype == 'M' || utype == 'm'){
+            userArry[exist].UserType = Manager;
+        }else{
+            userArry[exist].UserType = Clerk;
+        }
+
+        FILE * fFile = fopen(UserFileName, "wb+");
+
+        if(fwrite(userArry, sizeof(User), totalUsers, fFile)){
+            fclose(fFile);
+            printf("\nUser Record Successfully Updated!\n");
+        }else{
+            fclose(fFile);
+            printf("\n#ERROR# -> Failed To Update User Record [Internal Error]\n");
+        }
+
+    }else{
+        printf("\n#ERROR# -> Error User Doesn't Exist [Out Of Bound Index]\n");
+        UpdateUser();
+    }
+}
 
 void UpdateBooking() {
 

@@ -16,7 +16,7 @@ void MenuA(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
     char selection;
     if(userType == Manager){
-        printf(" a). Add User\n b). Add Artiste\n c). Add Booking\n\n");
+        printf(" a). Add User\n b). Add Artiste\n c). Add Booking\n d). Main Menu\n e). Exit Software\n\n");
 
         fflush(stdin);
         printf("Select  Option: ");
@@ -24,15 +24,18 @@ void MenuA(int userType){
 
         if(selection == 'a' || selection == 'A'){
             AddUser(0);
-        }
-
-        while( selection == 'b' || selection == 'B' ){
+        }else if( selection == 'b' || selection == 'B' ){
 			AddArtiste();
-        }
-
-        if(selection == 'c' || selection == 'C'){
+        }else if(selection == 'c' || selection == 'C'){
             AddBooking();
-        }
+        }else if(selection == 'd' || selection == 'D'){
+            Menu(globalUser);
+		}else if(selection == 'e' || selection == 'e'){
+            exitProgram();
+		}else{
+		    printf("#\nERROR# -> Please select a valid option [Option Error]\n\n");
+            MenuA(globalUser);
+		}
     }else{
         //printf(" a). Add Booking\n\n");
         AddBooking();
@@ -43,19 +46,25 @@ void MenuB(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
     char selection;
     if(userType == Manager){
-        printf(" a). Update User\n c). Update Artiste\n\n");
+        printf(" a). Update User\n b). Update Artiste\n c). Main Menu\n d). Exit Software\n\n");
 
         fflush(stdin);
         printf(" Select  Option: ");
         scanf("%c", &selection);
 
         if(selection == 'a' || selection == 'A'){
-            //
+            UpdateUser();
         }else if( selection == 'b' || selection == 'B' ){
 			updateMenu();
-        }
+        }else if(selection == 'C' || selection == 'c'){
+            Menu(globalUser);
+        }else if(selection == 'D' || selection == 'd'){
+            exitProgram();
+        }else{
+		    printf("#\nERROR# -> Please select a valid option [Option Error]\n\n");
+            MenuB(globalUser);
+		}
     }else{
-        //printf(" a). Update Booking\n\n");
         UpdateBooking();
     }
 }
@@ -68,7 +77,7 @@ void MenuDelete(int userType){
 
         char selection;
 
-        printf(" a). Delete User\n b). Delete Artiste\n c). Delete Booking\n\n");
+        printf(" a). Delete User\n b). Delete Artiste\n c). Delete Booking\n d). Main Menu\n e). Exit Software\n\n");
 
         fflush(stdin);
         printf("Select  Option: ");
@@ -80,6 +89,13 @@ void MenuDelete(int userType){
 			DeleteArtiste();
         }else if(selection == 'c' || selection == 'C'){
             DeleteBooking();
+		}else if(selection == 'd' || selection == 'D'){
+            Menu(globalUser);
+		}else if(selection == 'e' || selection == 'e'){
+            exitProgram();
+		}else{
+		    printf("#\nERROR# -> Please select a valid option [Option Error]\n\n");
+            MenuDelete(globalUser);
 		}
 
     }
@@ -181,6 +197,32 @@ int Login(){
 
 }
 
+
+
+void LoginHandler(){
+    int loginStatus = Login();
+
+    int errorCount = 3;
+
+    while(loginStatus <= -1 && errorCount > 0){
+        printf("#Login Error# | Attempts Left: %d\n",errorCount);
+        loginStatus = Login();
+        errorCount--;
+    }
+
+    if(loginStatus > -1){
+        User user = *(ListOfUser()+loginStatus);
+        printf("Welcome, %s %s", user.FirstName, user.LastName);
+        globalUser = user.UserType;
+        LoggedInUser = user.Id;
+        Menu(user.UserType);
+    }else{
+        printf("Login Failed Please Try Again Later....");
+        exit(1);
+    }
+}
+
+
 void Menu(int userType){
 
     heading("Menu");
@@ -192,10 +234,25 @@ void Menu(int userType){
         printf("\n\n a). Add\n b). Update\n c). Search\n d). Generate Report");
     }
 
+    printf("\n\n\t*************************\n");
+    printf("\t*\t\t\t*\n");
+    printf("\t* 0). To Exit Program\t*\n");
+    printf("\t* 1). To Re-Login\t*\n");
+    printf("\t*\t\t\t*");
+    printf("\n\t*************************");
 
     fflush(stdin);
-    printf("\n\nSelect Option: ");
+    printf("\n\n Select Option: ");
     scanf("%c",&menuSelection);
+
+
+    if(menuSelection == '0'){
+        exitProgram();
+    }else if(menuSelection == '1'){
+        system("cls");
+        Welcome();
+        LoginHandler();
+    }
 
     if(menuSelection == 'a' || menuSelection == 'A'){
 
@@ -235,34 +292,6 @@ void Menu(int userType){
         printf("\n\n#ERROR# -> Invalid Menu Option\n");
         Menu(userType);
     }
-
-    Menu(userType);
 }
-
-void LoginHandler(){
-    int loginStatus = Login();
-
-    int errorCount = 3;
-
-    while(loginStatus <= -1 && errorCount > 0){
-        printf("#Login Error# | Attempts Left: %d\n",errorCount);
-        loginStatus = Login();
-        errorCount--;
-    }
-
-    if(loginStatus > -1){
-        User user = *(ListOfUser()+loginStatus);
-        printf("Welcome, %s %s", user.FirstName, user.LastName);
-        globalUser = user.UserType;
-        LoggedInUser = user.Id;
-        Menu(user.UserType);
-    }else{
-        printf("Login Failed Please Try Again Later....");
-        exit(1);
-    }
-}
-
-
-
 
 #endif // FUNCTIONS_H_INCLUDED

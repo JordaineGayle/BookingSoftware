@@ -190,7 +190,6 @@ int UserExist(int Id){
 /****************************************************/
 
 
-
 /***********************Artiste****************************/
 
 
@@ -315,10 +314,7 @@ int ArtisteExistById(int Id){
 }
 
 
-
-
 /***********************Artiste****************************/
-
 
 
 /***********************Foundation****************************/
@@ -475,8 +471,6 @@ Foundation * delFoundation(int Id){
 
 
 /***********************Foundation****************************/
-
-
 
 
 /***********************Accounts****************************/
@@ -639,9 +633,6 @@ Accounts * delAccount(int refId){
 }
 
 /***********************Accounts****************************/
-
-
-
 
 
 /***********************Booking****************************/
@@ -882,6 +873,22 @@ int BookingCountPerArtiste(int ArtisteId){
 
 
 
+void exitProgram(){
+    printf("Please Wait");
+    int  counter = 12;
+    while(counter > 0){
+        printf(".");
+        Sleep(200);
+        if(counter == 1){
+            Beep(800,1000);
+        }
+
+        counter--;
+
+    }
+    printf("\nThanks For Using  Good Bye!");
+    exit(1);
+}
 
 
 
