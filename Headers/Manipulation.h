@@ -450,10 +450,6 @@ void DeleteArtiste() {
     }
 }
 
-void UpdateArtiste() {
-
-}
-
 
 void AddBooking(){
 
@@ -659,7 +655,371 @@ void DeleteBooking(){
     }
 }
 
+
+
 void UpdateBooking() {
+
+    int selection;
+
+    DisplayBookings();
+
+    printf(" Select Booking Id To Update: ");
+
+    scanf("%d", &selection);
+
+    int exist = BookingExistById(selection);
+
+    if(exist > -1){
+
+        DisplayArtiste();
+
+        char voluntaryService;
+
+        int totalBooking = BookingCount();
+
+        Booking bookingArry[totalBooking];
+
+        Booking * ptr = BookingList();
+
+        for(int x = 0; x < totalBooking; x++){
+            bookingArry[x] = *(ptr+x);
+        }
+
+
+
+        fflush(stdin);
+        printf(" Enter ArtisteId: ");
+        scanf("%d",&bookingArry[exist].ArtisteId);
+
+        while(ArtisteExistById(bookingArry[exist].ArtisteId) <= -1){
+            fflush(stdin);
+            printf("\n#ERROR# -> Artiste Doesn't Exist [ArtisteId Error]\n\n");
+            printf(" Enter ArtisteId: ");
+            scanf("%d",&bookingArry[exist].ArtisteId);
+        }
+
+        fflush(stdin);
+        printf("\n Enter Booking Date: ");
+        scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+
+        while(DateCompare(bookingArry[exist].DateBooked, currentDate()) != 1){
+            fflush(stdin);
+            printf("\n#ERROR# -> Date Must Be Grater Than Today [Date Less]\n");
+            printf("\n Enter A Valid Booking Date: ");
+            scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+        }
+
+        while(BookingExist(bookingArry[exist].ArtisteId, bookingArry[exist].DateBooked) >= 0){
+            fflush(stdin);
+            printf("\n#ERROR# -> Date Already Booked By You [ArtisteId Error]\n\n");
+            printf("\n Enter A Valid Booking Date: ");
+            scanf("%d/%d/%d",&bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+        }
+
+        while(BookingCountPerYear(bookingArry[exist].ArtisteId) >= 15){
+            fflush(stdin);
+            printf("\n#ERROR# -> This Artiste Already Reached His Yearly Quota [Max Booking Per Year]\n");
+            printf("\n Enter A Valid Booking Date: ");
+            scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+        }
+
+
+        fflush(stdin);
+        printf("\n Enter Booking Type: (O-Overseas | L-Local): ");
+        scanf("%c",&bookingArry[exist].Type);
+
+        fflush(stdin);
+        printf("\n Booking Location: ");
+        gets(bookingArry[exist].Location);
+
+        fflush(stdin);
+        printf("\n Guide: ");
+        gets(bookingArry[exist].Guide);
+
+        fflush(stdin);
+        printf("\n Promoter Name: ");
+        gets(bookingArry[exist].PromoterName);
+
+        fflush(stdin);
+        printf("\n Local Rate: ");
+        scanf("%f",&bookingArry[exist].Rate.local);
+
+        fflush(stdin);
+        printf("\n International Rate: ");
+        scanf("%f",&bookingArry[exist].Rate.overseas);
+
+        fflush(stdin);
+        printf("\n Voluntary Service (Y/N): ");
+        scanf("%c",&voluntaryService);
+
+        if(voluntaryService == 'y' || voluntaryService == 'Y'){
+            bookingArry[exist].IsVoluntary = one; //true
+        }else{
+            bookingArry[exist].IsVoluntary = zero; //false
+        }
+
+        if(bookingArry[exist].Type == 'O' || bookingArry[exist].Type == 'o'){
+
+            fflush(stdin);
+            printf("\n Hotel Name: ");
+            gets(bookingArry[exist].Info.HotelInfo);
+
+            fflush(stdin);
+            printf("\n Cost of Hotel: ");
+            scanf("%f",&bookingArry[exist].Info.HotelCharge);
+
+            fflush(stdin);
+            printf("\n Flight Origin State/Country - Destination State/Country: ");
+            gets(bookingArry[exist].Info.FlightInfo);
+
+            fflush(stdin);
+            printf("\n Plane Fare: ");
+            scanf("%f",&bookingArry[exist].Info.PlaneFare);
+
+            fflush(stdin);
+            printf("\n Number Of People: ");
+            scanf("%d",&bookingArry[exist].Info.NumberOfPersons);
+        }
+
+        //bookingArry[exist].EmployeeId = LoggedInUser;
+
+        FILE * fFile = fopen(BookingFileName, "wb+");
+
+        if(fwrite(bookingArry, sizeof(Booking), totalBooking, fFile)){
+            fclose(fFile);
+            printf("\nBooking Record Successfully Updated!\n");
+        }else{
+            fclose(fFile);
+            printf("\n#ERROR# -> Failed To Update Booking Record [Internal Error]\n");
+        }
+
+    }else{
+        printf("\n#ERROR# -> Error Booking Doesn't Exist [Out Of Bound Index]\n");
+        UpdateBooking();
+    }
 }
 
+void UpdateFoundation(){
+
+    int selection;
+
+    DisplayFoundation();
+
+    printf(" Select Foundation Id To Update: ");
+
+    scanf("%d", &selection);
+
+    int exist = FoundationExistById(selection);
+
+    if(exist > -1){
+
+        int totalFoundations = FoundationCount();
+
+        Foundation foundationArry[totalFoundations];
+
+        int totalAccounts = AccountsCount();
+
+        Accounts accountArry[totalAccounts];
+
+
+        Foundation * ptr = FoundationList();
+
+        for(int x = 0; x < totalFoundations; x++){
+            foundationArry[x] = *(ptr+x);
+        }
+
+        Accounts * aPtr = AccountsList();
+
+        for(int x = 0; x < totalAccounts; x++){
+            accountArry[x] = *(aPtr+x);
+        }
+
+        fflush(stdin);
+        printf(" Enter Foundation Name: ");
+        gets(foundationArry[exist].NameOfFoundation);
+
+        while (FoundationExist(foundationArry[exist].NameOfFoundation) > -1) {
+            fflush(stdin);
+            printf("\n#ERROR# -> Foundation Already Exist [FoundationName Error]\n");
+            printf(" Enter Foundation Name: ");
+            gets(foundationArry[exist].NameOfFoundation);
+        }
+
+        fflush(stdin);
+        printf("\n Enter Foundation Address: ");
+        gets(foundationArry[exist].Address);
+
+        fflush(stdin);
+        printf("\n Enter Foundation Year Founded: ");
+        scanf("%d",&foundationArry[exist].YearFounded);
+
+        fflush(stdin);
+        printf("\n Enter Foundation Employee Total: ");
+        scanf("%d",&foundationArry[exist].NumberOfEmployees);
+
+        fflush(stdin);
+        printf("\n Enter Foundation Major Charity(Current) : ");
+        gets(foundationArry[exist].MajorityCurCharity);
+
+        int accExist = AccountExistByRef(foundationArry[exist].Id, FoundationAccount);
+
+        fflush(stdin);
+        printf(" \nEnter Foundation's Account Balance: ");
+        scanf("%f",&accountArry[accExist].AccountInfo.AccountBalance);
+
+
+        FILE * fFile = fopen(FoundationFileName, "wb+");
+
+        fwrite(foundationArry, sizeof(Foundation), totalFoundations, fFile);
+
+        fclose(fFile);
+
+        Sleep(300);
+
+        FILE * aFile = fopen(AccountsFileName,"wb+");
+
+        if(fwrite(accountArry, sizeof(Accounts), totalAccounts, aFile)){
+            fclose(aFile);
+            printf("\nFoundation Record Successfully Updated!\n");
+        }else{
+            fclose(aFile);
+            printf("\n#ERROR# -> Failed To Update Foundation Record [Internal Error]\n");
+        }
+
+    }else{
+        printf("\n#ERROR# -> Error Foundation Doesn't Exist [Out Of Bound Index]\n");
+        UpdateFoundation();
+    }
+}
+
+void UpdateArtiste() {
+
+    int selection;
+
+    DisplayArtiste();
+
+    printf(" Select Artiste Id To Update: ");
+
+    scanf("%d", &selection);
+
+    int exist = ArtisteExistById(selection);
+
+    if(exist > -1){
+
+        int totalArtiste = ArtisteCount();
+
+        Artiste artisteArry[totalArtiste];
+
+        int totalAccounts = AccountsCount();
+
+        Accounts accountArry[totalAccounts];
+
+
+        Artiste * ptr = ArtisteList();
+
+        for(int x = 0; x < totalArtiste; x++){
+            artisteArry[x] = *(ptr+x);
+        }
+
+        Accounts * aPtr = AccountsList();
+
+        for(int x = 0; x < totalAccounts; x++){
+            accountArry[x] = *(aPtr+x);
+        }
+
+        fflush(stdin);
+        printf(" Enter Artiste's Stage Name: ");
+        gets(artisteArry[exist].StageName);
+
+        while (ArtisteExist(artisteArry[exist].StageName) > -1) {
+            fflush(stdin);
+            printf("\n#ERROR# -> Artiste Name Already Taken [StageName Error]\n");
+            printf(" Enter Artiste's Stage Name: ");
+            gets(artisteArry[exist].StageName);
+        }
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Firstname: ");
+        gets(artisteArry[exist].FirstName);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Lastname: ");
+        gets(artisteArry[exist].LastName);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Telephone#: "); //remeber to add back the quote
+        gets(artisteArry[exist].TelephoneNumber);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's PhysicalAddress: ");
+        gets(artisteArry[exist].PhysicalAddress);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Email: ");
+        gets(artisteArry[exist].Email);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Genre: ");
+        gets(artisteArry[exist].Genre);
+
+        int accExist = AccountExistByRef(artisteArry[exist].Id, ArtisteAccount);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Account Balance: ");
+        scanf("%f",&accountArry[accExist].AccountInfo.AccountBalance);
+
+        fflush(stdin);
+        printf("\n Enter Artiste's Yearly Earnings: ");
+        scanf("%f",&artisteArry[exist].YearlyEarnings);
+
+
+        FILE * fFile = fopen(ArtisteFileName, "wb+");
+
+        fwrite(artisteArry, sizeof(Artiste), totalArtiste, fFile);
+
+        fclose(fFile);
+
+        Sleep(300);
+
+        FILE * aFile = fopen(AccountsFileName,"wb+");
+
+        if(fwrite(accountArry, sizeof(Accounts), totalAccounts, aFile)){
+            fclose(aFile);
+            printf("\nArtiste Record Successfully Updated!\n");
+        }else{
+            fclose(aFile);
+            printf("\n#ERROR# -> Failed To Update Artiste Record [Internal Error]\n");
+        }
+
+    }else{
+        printf("\n#ERROR# -> Error Artiste Doesn't Exist [Out Of Bound Index]\n");
+        UpdateArtiste();
+    }
+
+}
+
+void updateMenu(){
+
+    char selection;
+
+    printf("\n *Please Select A Option From Below*\n\n");
+
+    fflush(stdin);
+    printf(" a). Artiste Information\n b). Foundation\n c). Booking\n\n");
+
+    fflush(stdin);
+    printf(" Enter Option: ");
+    scanf("%c",&selection);
+
+    if(selection == 'a' || selection == 'A'){
+        UpdateArtiste();
+    }else if(selection == 'b' || selection == 'B'){
+        UpdateFoundation();
+    }else if(selection == 'c' || selection == 'C'){
+        UpdateBooking();
+    }else{
+        updateMenu();
+    }
+
+}
 #endif // MANIPULATION_H_INCLUDED

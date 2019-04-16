@@ -41,10 +41,22 @@ void MenuA(int userType){
 
 void MenuB(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
+    char selection;
     if(userType == Manager){
-        printf(" a). Update User\n c). Update Artiste\n c). Update Booking\n\n");
+        printf(" a). Update User\n c). Update Artiste\n\n");
+
+        fflush(stdin);
+        printf(" Select  Option: ");
+        scanf("%c", &selection);
+
+        if(selection == 'a' || selection == 'A'){
+            //
+        }else if( selection == 'b' || selection == 'B' ){
+			updateMenu();
+        }
     }else{
-        printf(" a). Update Booking\n\n");
+        //printf(" a). Update Booking\n\n");
+        UpdateBooking();
     }
 }
 
@@ -106,8 +118,8 @@ void MenuReport(){
 
 int Login(){
 
-    char tempUsername[25];
-    char tempPassword[25];
+    char tempUsername[100];
+    char tempPassword[100];
     char pass;
     char userType;
     int index = 0;

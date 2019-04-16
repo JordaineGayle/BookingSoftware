@@ -16,8 +16,7 @@ int file_exists(char * filename)
     return 0;
 }
 
-int DateCompare(Date d1, Date d2)
-{
+int DateCompare(Date d1, Date d2){
     if (d1.year < d2.year)
        return -1;
 
@@ -51,7 +50,6 @@ long randAccNum(long mini, long maxx) {
 
 	return (long)abs((mini*rand() % maxx) + rand() % 100) - 1;
 }
-
 
 int currentYear(){
 
@@ -363,7 +361,6 @@ int FoundationCount() {
 	}
 }
 
-
 Foundation * FoundationList() {
 
 	if (file_exists(FoundationFileName) == 0) {
@@ -394,7 +391,6 @@ Foundation * FoundationList() {
 
 }
 
-
 int FoundationExist(char * foundationName) {
 
 	if (file_exists(FoundationFileName) == 0) {
@@ -422,6 +418,32 @@ int FoundationExist(char * foundationName) {
 	return -1;
 }
 
+int FoundationExistById(int Id) {
+
+	if (file_exists(FoundationFileName) == 0) {
+
+		const int counted = FoundationCount();
+
+		if(counted <= 0){
+            return -1;
+		}else{
+            Foundation * ptr = FoundationList();
+
+            if (ptr == NULL) {
+                return -1;
+            }
+
+            for (int x = 0; x < counted; x++) {
+
+                if ( (ptr+x)->Id == Id ) {
+                    return x;
+                }
+            }
+		}
+	}
+
+	return -1;
+}
 
 Foundation * delFoundation(int Id){
 
@@ -553,6 +575,32 @@ int AccountExist(int accNum) {
 	return -1;
 }
 
+int AccountExistByRef(int refId, AccountTypes accType) {
+
+	if (file_exists(AccountsFileName) == 0) {
+
+		const int counted = AccountsCount();
+
+		if(counted <= 0){
+			return -1;
+		}else{
+			Accounts * ptr = AccountsList();
+
+			if (ptr == NULL) {
+				return -1;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ( (ptr+x)->RefId == refId && (ptr+x)->AccountInfo.AccountType == accType ) {
+					return x;
+				}
+			}
+		}
+	}
+
+	return -1;
+}
 
 Accounts * delAccount(int refId){
 
@@ -635,8 +683,6 @@ int BookingCount(){
 		return 0;
 	}
 }
-
-
 
 Booking * BookingList(){
 
