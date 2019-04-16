@@ -11,6 +11,23 @@ void Welcome(){
     nl(2);
 }
 
+void MenuDisplay(int userType){
+
+    char selection;
+
+    if(userType == Manager){
+        st();
+        printf("\n\t\tDisplay Options\n\n");
+        printf(" a). All Users\n b). All Artiste\n c). All Booking\n d). All Foundations\n e). All Reports\n\n");
+        st();
+    }else{
+        st();
+        printf("\n\t\tDisplay Options\n\n");
+        printf("a). All Booking\n b). All Artiste\n c). All Reports\n\n");
+        st();
+    }
+
+}
 
 void MenuA(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
@@ -104,12 +121,10 @@ void MenuDelete(int userType){
 void MenuSearch(int userType){
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
     if(userType == Manager){
-        st();
-        printf("\n\t\tDisplay Options\n\n");
-        printf(" a). All Users\n b). All Artiste\n c). All Booking\n d). All Foundations\n e). All Reports\n\n");
+
         st();
         printf("\n\t\tSearch Options\n\n");
-        printf(" a). QueryUserById\n b). QueryUserByName\n c). QueryUserByEmail\n d). QueryUserByType\n");
+        printf(" a). QueryUserById\n b). QueryUserByUsername\n c). QueryUserByEmail\n d). QueryUserByType\n");
         printf(" e). QueryArtisteById\n f). QueryUserByName\n g). QueryArtisteByStageName\n h). QueryArtisteByGenre\n");
         printf(" i). QueryBookingById\n j). QueryBookingByArtisteId\n k). QueryBookingByEmployeeId\n l). QueryArtisteByType\n");
         printf(" m). QueryByBookingNumber\n n). QueryArtisteByFoundationId\n");
@@ -128,7 +143,7 @@ void MenuReport(){
 
     printf("\n\n\t\tPlease Select What An Add Option Below\n\n");
 
-    printf(" a). Artiste Report\n b). Foundation Report");
+    printf(" a). Artiste Yearly Earning Report\n b). Foundation Revenue Report\n c). Generate Invoice\n d). Main Menu\n e). Exit");
 
 }
 
@@ -229,9 +244,9 @@ void Menu(int userType){
     char menuSelection;
 
     if(userType == Manager){
-        printf("\n\n a). Add\n b). Update\n c). Delete\n d). Search\n e). Generate Report");
+        printf("\n\n a). Add\n b). Update\n c). Delete\n d). Search\n e). Generate Report\n f). View/Display Records");
     }else{
-        printf("\n\n a). Add\n b). Update\n c). Search\n d). Generate Report");
+        printf("\n\n a). Add\n b). Update\n c). Search\n d). Generate Report\n e). View/Display Records");
     }
 
     printf("\n\n\t*************************\n");
@@ -283,10 +298,15 @@ void Menu(int userType){
 
             MenuReport(userType);
         }
-    }else if( (menuSelection == 'e' || menuSelection == 'E') && userType==Manager){
+    }else if( (menuSelection == 'e' || menuSelection == 'E')){
 
-        MenuReport();
-
+        if(userType == Manager){
+            MenuReport();
+        }else{
+            MenuDisplay(userType);
+        }
+    }else if(menuSelection == 'f' || menuSelection == 'F'  && userType==Manager){
+        MenuDisplay(userType);
     }
     else{
         printf("\n\n#ERROR# -> Invalid Menu Option\n");
