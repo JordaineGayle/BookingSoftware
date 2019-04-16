@@ -5,6 +5,17 @@
 
 void DisplayUsers(){
 
+    printf("\n\n\t\t\t\t\t*All Users In System*\n\n\n");
+
+    printf("\tId\tUserName\tFullName\t\tType\t\tDateJoined\n\n");
+    int userTotal = UserDataCount();
+
+    User *ptr = ListOfUser();
+
+    for(int x = 0; x < userTotal; x++){
+            printf("\t%-2d\t%s\t\t%s %s\t\t%s\t\t%s\n\n",
+                   (ptr+x)->Id,(ptr+x)->Username,(ptr+x)->FirstName, (ptr+x)->LastName,(ptr+x)->UserType == Manager ? "Manager" : "Clerk",(ptr+x)->DateJoined);
+        }
 }
 
 void DisplayBookings(){
@@ -42,7 +53,8 @@ void DisplayBookings(){
 
         }
 
-        printf("\n\n\t*Overseas Bookings*\n\n\t\tId\tArtiste\t\tBookingNum\tBookingDate\tCreatedBy\tLocation\tPromoter\tLocalRate\tForeignRate\tVoluntaryService\tHotelName\tHotelCharge\tPlaneFare\n\n");
+        printf("\t*Overseas Bookings*\n\n\t\tId\tArtiste\t\tBookingNum\tBookingDate\tCreatedBy\tLocation\tPromoter\tLocalRate\tForeignRate\tVoluntaryService\n\n");
+
         for(int x = 0; x < totalBookings; x++){
 
             if( (ptr+x)->Type == 'O' || (ptr+x)->Type == 'o' ){
@@ -53,16 +65,13 @@ void DisplayBookings(){
                 int k = UserExist( (ptr+x)->EmployeeId );
                 char * userE = (ListOfUser()+k)->Username;
 
-                printf("\t\t%-2d\t%-8s\t%-8d\t%d/%d/%d\t%-8s\t%-8s\t%-8s\t%-8.2f\t%-8.2f\t%-8c\t%15s\t\t%.2f\t\t%.2f\n\n",
+                 printf("\t\t%-2d\t%-8s\t%-8d\t%d/%d/%d\t%-8s\t%-8s\t%-8s\t%-8.2f\t%-8.2f\t%-8c\n\n",
                  (ptr+x)->Id, stageName,
                   (ptr+x)->BookingNumber,
                     (ptr+x)->DateBooked.day,(ptr+x)->DateBooked.month,(ptr+x)->DateBooked.year,
                     userE,
                     (ptr+x)->Location,(ptr+x)->PromoterName, (ptr+x)->Rate.local, (ptr+x)->Rate.overseas,
-                    (ptr+x)->IsVoluntary == one ? 'Y' : 'N',
-                       (ptr+x)->Info.HotelInfo,
-                       (ptr+x)->Info.HotelCharge,
-                       (ptr+x)->Info.PlaneFare
+                    (ptr+x)->IsVoluntary == one ? 'Y' : 'N'
                  );
 
             }
@@ -90,7 +99,23 @@ void DisplayArtiste(){
 }
 
 void DisplayFoundation(){
+    printf("\n\n\t\t\t\t\t*All Foundation In System*\n\n\n");
 
+    printf("\tId\tFoundation\tYear Founded\tAddress\t\tNo. Employees\tCharity Group\n\n");
+    int foundationTotal = FoundationCount();
+
+    Foundation *ptr = FoundationList();
+
+    for(int x = 0; x < foundationTotal; x++){
+        printf("\t%-2d\t%-8s\t%-8d\t%-8s\t%-8d\t%-8s\n\n",
+               (ptr+x)->Id, (ptr+x)->NameOfFoundation, (ptr+x)->YearFounded, (ptr+x)->Address, (ptr+x)->NumberOfEmployees, (ptr+x)->MajorityCurCharity );
+    }
 }
 
+
+
+
+void DisplaySavedReports(){
+    printf("\n\n\t\t\t\t\t*All Reports Generated*\n\n\n");
+}
 #endif // DISPLAY_H_INCLUDED

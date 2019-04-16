@@ -18,4 +18,8 @@ void GeneralReport(){
 
 }
 
+void GenerateInvoice(){
+
+}
+
 #endif // REPORTS_H_INCLUDED
