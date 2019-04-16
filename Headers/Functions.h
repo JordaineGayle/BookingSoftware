@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <conio.h>
 #include "Manipulation.h"
+#include "Search.h"
 
 void Welcome(){
     system("color f2");
@@ -168,18 +169,19 @@ void MenuDelete(int userType){
 void MenuSearch(int userType){
 
     char selection;
+    nl(2);
     st();st();
     printf("\n\n\t\t\t\t*Please Select an Option Below*\n\n");
 
     if(userType == Manager){
 
         st();st();
-        printf(" a). QueryUserById\n b). QueryUserByUsername\n c). QueryArtisteById\n d). QueryArtisteStageName\n");
+        printf("\n\n a). QueryUserById\n b). QueryUserByUsername\n c). QueryArtisteById\n d). QueryArtisteStageName\n");
         printf(" e). QueryFoundationById\n f). QueryFoundationByDateFounded\n g). QueryBookingByBookingNumber\n g). QueryBookingByArtisteId\n");
         printf(" i). QueryBookingByDate\n j). QueryBookingByPromoterName\n k.) QueryBookingByEmployeeId\n\n");
     }else{
         st();st();
-        printf(" a). QueryArtisteById\n b). QueryArtisteStageName\n");
+        printf("\n\n a). QueryArtisteById\n b). QueryArtisteStageName\n");
         printf(" c). QueryBookingByBookingNumber\n d). QueryBookingByArtisteId\n");
         printf(" e). QueryBookingByDate\n f). QueryBookingByPromoterName\n g.) QueryBookingByEmployeeId\n\n");
     }
@@ -188,9 +190,18 @@ void MenuSearch(int userType){
     printf("\n Enter Query Option: ");
     scanf("%c",&selection);
 
-    if(selection == 'a' || selection == 'b'){
+    if(selection == 'a' || selection == 'A'){
+
+        if(userType==Manager){
+            SearchUserById();
+
+        }else{
+
+        }
 
     }
+
+    MenuSearch(userType);
 }
 
 void MenuReport(){

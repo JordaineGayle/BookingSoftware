@@ -116,5 +116,6 @@ void DisplayFoundation(){
 
 
 void DisplaySavedReports(){
+    printf("\n\n\t\t\t\t\t*All Reports Generated*\n\n\n");
 }
 #endif // DISPLAY_H_INCLUDED

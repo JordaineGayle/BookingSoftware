@@ -39,11 +39,12 @@
 	<stdlib.h>
 	"Headers/Functions.h"
 
-1555418565 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
+1555421325 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
 	<time.h>
 	<ctype.h>
 	<conio.h>
 	"Manipulation.h"
+	"Search.h"
 
 1555414135 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\datamanipulation.h
 	<stdio.h>
@@ -102,6 +103,9 @@
 	"Display.h"
 	"Functions.h"
 
-1555416954 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\display.h
+1555418837 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\display.h
+	"Helpers.h"
+
+1555421337 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\search.h
 	"Helpers.h"
 
