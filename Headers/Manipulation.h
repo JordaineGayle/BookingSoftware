@@ -2,6 +2,19 @@
 #define MANIPULATION_H_INCLUDED
 #include "DATAManipulation.h"
 #include "Display.h"
+#include "Functions.h"
+
+void Menu(int);
+
+void MenuA(int);
+
+void MenuB(int);
+
+void MenuReport();
+
+void MenuSearch();
+
+void MenuDelete(int);
 
 void AddUser(int firstTime){
 
@@ -31,11 +44,11 @@ void AddUser(int firstTime){
     fflush(stdin);
     printf("\nEnter Last Name: ");
     gets(newuser.LastName);
-    if(strcmpi(newuser.FirstName,"-1") == 0){
+    if(strcmpi(newuser.LastName,"-1") == 0){
         exitProgram();
-    }else if(strcmpi(newuser.FirstName,"-2") == 0){
+    }else if(strcmpi(newuser.LastName,"-2") == 0){
         MenuA(globalUser);
-    }else if(strcmpi(newuser.FirstName,"-3") == 0){
+    }else if(strcmpi(newuser.LastName,"-3") == 0){
         Menu(globalUser);
     }
 
@@ -75,6 +88,13 @@ void AddUser(int firstTime){
     fflush(stdin);
     printf("\nSelect User Type (M - Manager, C - Clerk): ");
     scanf("%c", &utype);
+    if(utype=='1'){
+        exitProgram();
+    }else if(utype=='2'){
+        MenuA(globalUser);
+    }else if(utype=='3'){
+        Menu(globalUser);
+    }
 
 
     while(firstTime == 1 && (utype != 'm' || utype != 'M') ){
@@ -83,6 +103,13 @@ void AddUser(int firstTime){
         printf("\n#ERROR# -> First Time Users Are Required To Be Manager [UserError]\n");
         printf("\nSelect User Type (M - Manager, C - Clerk): ");
         scanf("%c", &utype);
+        if(utype=='1'){
+        exitProgram();
+    }else if(utype=='2'){
+        MenuA(globalUser);
+    }else if(utype=='3'){
+        Menu(globalUser);
+    }
 
         if(utype == 'M' || utype == 'm'){
             break;
@@ -528,7 +555,7 @@ void DeleteArtiste() {
 
 	fflush(stdin);
 	printf("Select StageName Of Artiste To Delete: ");
-	gets(selection)
+	gets(selection);
     if(strcmpi(selection,"-1") == 0){
         exitProgram();
     }else if(strcmpi(selection,"-2") == 0){
@@ -635,20 +662,30 @@ void AddBooking(){
 
     DisplayArtiste();
 
-    printf(" * -1 Exit Program * \n");
-    printf(" * -2 Prevoius Menu * \n");
-    printf(" * -3 Main Menu * \n\n");
+    if(globalUser == Manager){
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n");
+        printf(" * -3 Main Menu * \n\n");
+    }else{
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n\n");
+    }
+
 
     char voluntaryService;
 
     fflush(stdin);
     printf(" Enter ArtisteId: ");
     scanf("%d",&booking.ArtisteId);
-    if(strcmpi(selection,"-1") == 0){
+    if(booking.ArtisteId == -1){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(booking.ArtisteId == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.ArtisteId == -3){
         Menu(globalUser);
     }
 
@@ -657,11 +694,15 @@ void AddBooking(){
         printf("\n#ERROR# -> Artiste Doesn't Exist [ArtisteId Error]\n\n");
         printf(" Enter ArtisteId: ");
         scanf("%d",&booking.ArtisteId);
-        if(strcmpi(selection,"-1") == 0){
+        if(booking.ArtisteId==-1){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(booking.ArtisteId==-2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.ArtisteId==-3){
         Menu(globalUser);
     }
     }
@@ -669,17 +710,32 @@ void AddBooking(){
     fflush(stdin);
     printf("\n Enter Booking Date: ");
     scanf("%d/%d/%d", &booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
+    if(booking.DateBooked.day == -1 || booking.DateBooked.month == -1 || booking.DateBooked.year == -1){
+        exitProgram();
+    }else if(booking.DateBooked.day == -2 || booking.DateBooked.month == -2 || booking.DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.DateBooked.day == -3 || booking.DateBooked.month == -3 || booking.DateBooked.year == -3){
+        Menu(globalUser);
+    }
 
     while(DateCompare(booking.DateBooked, currentDate()) != 1){
         fflush(stdin);
         printf("\n#ERROR# -> Date Must Be Grater Than Today [Date Less]\n");
         printf("\n Enter A Valid Booking Date: ");
         scanf("%d/%d/%d", &booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
-        if(strcmpi(selection,"-1") == 0){
+        if(booking.DateBooked.day == -1 || booking.DateBooked.month == -1 || booking.DateBooked.year == -1){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(booking.DateBooked.day == -2 || booking.DateBooked.month == -2 || booking.DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.DateBooked.day == -3 || booking.DateBooked.month == -3 || booking.DateBooked.year == -3){
         Menu(globalUser);
     }
     }
@@ -689,11 +745,15 @@ void AddBooking(){
         printf("\n#ERROR# -> Date Already Booked By You [ArtisteId Error]\n\n");
         printf("\n Enter A Valid Booking Date: ");
         scanf("%d/%d/%d",&booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
-        if(strcmpi(selection,"-1") == 0){
+        if(booking.DateBooked.day == -1 || booking.DateBooked.month == -1 || booking.DateBooked.year == -1){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(booking.DateBooked.day == -2 || booking.DateBooked.month == -2 || booking.DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.DateBooked.day == -3 || booking.DateBooked.month == -3 || booking.DateBooked.year == -3){
         Menu(globalUser);
     }
     }
@@ -703,11 +763,15 @@ void AddBooking(){
         printf("\n#ERROR# -> This Artiste Already Reached His Yearly Quota [Max Booking Per Year]\n");
         printf("\n Enter A Valid Booking Date: ");
         scanf("%d/%d/%d", &booking.DateBooked.day,&booking.DateBooked.month,&booking.DateBooked.year);
-        if(strcmpi(selection,"-1") == 0){
+        if(booking.DateBooked.day == -1 || booking.DateBooked.month == -1 || booking.DateBooked.year == -1){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(booking.DateBooked.day == -2 || booking.DateBooked.month == -2 || booking.DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.DateBooked.day == -3 || booking.DateBooked.month == -3 || booking.DateBooked.year == -3){
         Menu(globalUser);
     }
     }
@@ -716,44 +780,60 @@ void AddBooking(){
     fflush(stdin);
     printf("\n Enter Booking Type: (O-Overseas | L-Local): ");
     scanf("%c",&booking.Type);
-    if(strcmpi(selection,"-1") == 0){
+    if(booking.Type=='1'){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(booking.Type=='2'){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.Type=='3'){
         Menu(globalUser);
     }
 
     fflush(stdin);
     printf("\n Booking Location: ");
     gets(booking.Location);
-    if(strcmpi(selection,"-1") == 0){
+    if(strcmpi(booking.Location,"-1") == 0){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(strcmpi(booking.Location,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(booking.Location,"-3") == 0){
         Menu(globalUser);
     }
 
     fflush(stdin);
     printf("\n Guide: ");
     gets(booking.Guide);
-    if(strcmpi(selection,"-1") == 0){
+    if(strcmpi(booking.Guide,"-1") == 0){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(strcmpi(booking.Guide,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(booking.Guide,"-3") == 0){
         Menu(globalUser);
     }
 
     fflush(stdin);
     printf("\n Promoter Name: ");
     gets(booking.PromoterName);
-    if(strcmpi(selection,"-1") == 0){
+    if(strcmpi(booking.PromoterName,"-1") == 0){
         exitProgram();
-    }else if(strcmpi(selection,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(selection,"-3") == 0){
+    }else if(strcmpi(booking.PromoterName,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(booking.PromoterName,"-3") == 0){
         Menu(globalUser);
     }
 
@@ -762,9 +842,13 @@ void AddBooking(){
     scanf("%f",&booking.Rate.local);
     if(booking.Rate.local == -1){
         exitProgram();
-    }else if(booking.Rate.local == -1){
-        MenuDelete(globalUser);
-    }else if(booking.Rate.local == -1){
+    }else if(booking.Rate.local == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.Rate.local == -3){
         Menu(globalUser);
     }
 
@@ -774,7 +858,11 @@ void AddBooking(){
     if(booking.Rate.overseas == -1){
         exitProgram();
     }else if(booking.Rate.overseas == -2){
-        MenuDelete(globalUser);
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
     }else if(booking.Rate.overseas == -3){
         Menu(globalUser);
     }
@@ -785,7 +873,11 @@ void AddBooking(){
     if(voluntaryService == '1'){
         exitProgram();
     }else if(voluntaryService == '2'){
-        MenuDelete(globalUser);
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
     }else if(voluntaryService == '3'){
         Menu(globalUser);
     }
@@ -804,7 +896,11 @@ void AddBooking(){
         if(strcmpi(booking.Info.HotelInfo,"-1") == 0){
         exitProgram();
     }else if(strcmpi(booking.Info.HotelInfo,"-2") == 0){
-        MenuDelete(globalUser);
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
     }else if(strcmpi(booking.Info.HotelInfo,"-3") == 0){
         Menu(globalUser);
     }
@@ -812,17 +908,19 @@ void AddBooking(){
         fflush(stdin);
         printf("\n Cost of Hotel: ");
         scanf("%f",&booking.Info.HotelCharge);
-        if(strcmpi(booking.Info.HotelCharge,"-1") == 0){
+        if(booking.Info.HotelCharge==-1){
         exitProgram();
-    }else if(strcmpi(booking.Info.HotelCharge,"-2") == 0){
+    }else if(booking.Info.HotelCharge==-2){
         if(globalUser == Manager){
-            MenuDelete(globalUser);
-        }else{
-            Menu(globalUser)
+            if(globalUser == Manager){
+                    MenuDelete(globalUser);
+            }else{
+                Menu(globalUser);
+            }
         }
 
-    }else if(strcmpi(selection,"-3") == 0){
-        Menu(booking.Info.FlightInfo);
+    }else if(booking.Info.HotelCharge==-3){
+        Menu(globalUser);
     }
 
         fflush(stdin);
@@ -831,7 +929,11 @@ void AddBooking(){
         if(strcmpi(booking.Info.FlightInfo,"-1") == 0){
         exitProgram();
     }else if(strcmpi(booking.Info.FlightInfo,"-2") == 0){
-        MenuDelete(globalUser);
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
     }else if(strcmpi(booking.Info.FlightInfo,"-3") == 0){
         Menu(globalUser);
     }
@@ -839,22 +941,30 @@ void AddBooking(){
         fflush(stdin);
         printf("\n Plane Fare: ");
         scanf("%f",&booking.Info.PlaneFare);
-        if(strcmpi(booking.Info.PlaneFare,"-1") == 0){
+        if(booking.Info.PlaneFare==-1){
         exitProgram();
-    }else if(strcmpi(booking.Info.PlaneFare,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(booking.Info.PlaneFare,"-3") == 0){
+    }else if(booking.Info.PlaneFare==-2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.Info.PlaneFare==-3){
         Menu(globalUser);
     }
 
         fflush(stdin);
         printf("\n Number Of People: ");
         scanf("%d",&booking.Info.NumberOfPersons);
-        if(strcmpi(booking.Info.NumberOfPersons,"-1") == 0){
+        if(booking.Info.NumberOfPersons==-1){
         exitProgram();
-    }else if(strcmpi(booking.Info.NumberOfPersons,"-2") == 0){
-        MenuDelete(globalUser);
-    }else if(strcmpi(booking.Info.NumberOfPersons,"-3") == 0){
+    }else if(booking.Info.NumberOfPersons==-2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(booking.Info.NumberOfPersons==-3){
         Menu(globalUser);
     }
     }
@@ -975,13 +1085,26 @@ void DeleteBooking(){
 
 
 void UpdateUser(){
+
     int selection;
 
     DisplayUsers();
 
+
+    printf(" * -1 Exit Program* \n");
+    printf(" * -2 Prevoius Menu* \n");
+    printf(" * -3 Main Menu* \n\n");
+
     printf(" Select User Id To Update: ");
 
     scanf("%d", &selection);
+    if(selection==-1){
+            exitProgram();
+        }else if(selection==-2){
+            MenuA(globalUser);
+        }else if(selection==-3){
+            Menu(globalUser);
+        }
 
     int exist = UserExist(selection);
 
@@ -1002,27 +1125,68 @@ void UpdateUser(){
         fflush(stdin);
         printf("Enter First Name: ");
         gets(userArry[exist].FirstName);
+        if(strcmpi(userArry[exist].FirstName,"-1") == 0){
+            exitProgram();
+        }else if(strcmpi(userArry[exist].FirstName,"-2") == 0){
+            MenuA(globalUser);
+        }else if(strcmpi(userArry[exist].FirstName,"-3") == 0){
+            Menu(globalUser);
+        }
 
         fflush(stdin);
         printf("\nEnter Last Name: ");
         gets(userArry[exist].LastName);
+        if(strcmpi(userArry[exist].LastName,"-1") == 0){
+            exitProgram();
+        }else if(strcmpi(userArry[exist].LastName,"-2") == 0){
+            MenuA(globalUser);
+        }else if(strcmpi(userArry[exist].LastName,"-3") == 0){
+            Menu(globalUser);
+        }
 
         fflush(stdin);
         printf("\nEnter System Username: ");
         gets(userArry[exist].Username);
+        if(strcmpi(userArry[exist].Username,"-1") == 0){
+            exitProgram();
+        }else if(strcmpi(userArry[exist].Username,"-2") == 0){
+            MenuA(globalUser);
+        }else if(strcmpi(userArry[exist].Username,"-3") == 0){
+            Menu(globalUser);
+        }
 
         fflush(stdin);
         printf("\nEnter System Password: ");
         gets(userArry[exist].Password);
+        if(strcmpi(userArry[exist].Password,"-1") == 0){
+            exitProgram();
+        }else if(strcmpi(userArry[exist].Password,"-2") == 0){
+            MenuA(globalUser);
+        }else if(strcmpi(userArry[exist].Password,"-3") == 0){
+            Menu(globalUser);
+        }
 
         fflush(stdin);
         printf("\nEnter Address: ");
         gets(userArry[exist].Address);
+        if(strcmpi(userArry[exist].Address,"-1") == 0){
+            exitProgram();
+        }else if(strcmpi(userArry[exist].Address,"-2") == 0){
+            MenuA(globalUser);
+        }else if(strcmpi(userArry[exist].Address,"-3") == 0){
+            Menu(globalUser);
+        }
 
         fflush(stdin);
         printf("\nSelect User Type (M - Manager, C - Clerk): ");
         scanf("%c", &utype);
-
+        if(utype=='1'){
+            exitProgram();
+        }else if(utype=='2'){
+            MenuA(globalUser);
+        }else if(utype=='3'){
+            Menu(globalUser);
+        }
 
         if(utype == 'M' || utype == 'm'){
             userArry[exist].UserType = Manager;
@@ -1052,9 +1216,31 @@ void UpdateBooking() {
 
     DisplayBookings();
 
+    if(globalUser == Manager){
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n");
+        printf(" * -3 Main Menu * \n\n");
+    }else{
+        printf(" * -1 Exit Program * \n");
+        printf(" * -2 Prevoius Menu * \n\n");
+    }
+
     printf(" Select Booking Id To Update: ");
 
     scanf("%d", &selection);
+    if(selection == -1){
+        exitProgram();
+    }else if(selection == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+
+    }else if(selection == -3){
+        Menu(globalUser);
+    }
+
 
     int exist = BookingExistById(selection);
 
@@ -1076,99 +1262,299 @@ void UpdateBooking() {
 
 
 
+            fflush(stdin);
+    printf(" Enter ArtisteId: ");
+    scanf("%d",&bookingArry[exist].ArtisteId);
+    if(bookingArry[exist].ArtisteId == -1){
+        exitProgram();
+    }else if(bookingArry[exist].ArtisteId == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].ArtisteId == -3){
+        Menu(globalUser);
+    }
+
+    while(ArtisteExistById(bookingArry[exist].ArtisteId) <= -1){
         fflush(stdin);
+        printf("\n#ERROR# -> Artiste Doesn't Exist [ArtisteId Error]\n\n");
         printf(" Enter ArtisteId: ");
         scanf("%d",&bookingArry[exist].ArtisteId);
-
-        while(ArtisteExistById(bookingArry[exist].ArtisteId) <= -1){
-            fflush(stdin);
-            printf("\n#ERROR# -> Artiste Doesn't Exist [ArtisteId Error]\n\n");
-            printf(" Enter ArtisteId: ");
-            scanf("%d",&bookingArry[exist].ArtisteId);
-        }
-
-        fflush(stdin);
-        printf("\n Enter Booking Date: ");
-        scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
-
-        while(DateCompare(bookingArry[exist].DateBooked, currentDate()) != 1){
-            fflush(stdin);
-            printf("\n#ERROR# -> Date Must Be Grater Than Today [Date Less]\n");
-            printf("\n Enter A Valid Booking Date: ");
-            scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
-        }
-
-        while(BookingExist(bookingArry[exist].ArtisteId, bookingArry[exist].DateBooked) >= 0){
-            fflush(stdin);
-            printf("\n#ERROR# -> Date Already Booked By You [ArtisteId Error]\n\n");
-            printf("\n Enter A Valid Booking Date: ");
-            scanf("%d/%d/%d",&bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
-        }
-
-        while(BookingCountPerYear(bookingArry[exist].ArtisteId) >= 15){
-            fflush(stdin);
-            printf("\n#ERROR# -> This Artiste Already Reached His Yearly Quota [Max Booking Per Year]\n");
-            printf("\n Enter A Valid Booking Date: ");
-            scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
-        }
-
-
-        fflush(stdin);
-        printf("\n Enter Booking Type: (O-Overseas | L-Local): ");
-        scanf("%c",&bookingArry[exist].Type);
-
-        fflush(stdin);
-        printf("\n Booking Location: ");
-        gets(bookingArry[exist].Location);
-
-        fflush(stdin);
-        printf("\n Guide: ");
-        gets(bookingArry[exist].Guide);
-
-        fflush(stdin);
-        printf("\n Promoter Name: ");
-        gets(bookingArry[exist].PromoterName);
-
-        fflush(stdin);
-        printf("\n Local Rate: ");
-        scanf("%f",&bookingArry[exist].Rate.local);
-
-        fflush(stdin);
-        printf("\n International Rate: ");
-        scanf("%f",&bookingArry[exist].Rate.overseas);
-
-        fflush(stdin);
-        printf("\n Voluntary Service (Y/N): ");
-        scanf("%c",&voluntaryService);
-
-        if(voluntaryService == 'y' || voluntaryService == 'Y'){
-            bookingArry[exist].IsVoluntary = one; //true
+        if(bookingArry[exist].ArtisteId == -1){
+        exitProgram();
+    }else if(bookingArry[exist].ArtisteId == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
         }else{
-            bookingArry[exist].IsVoluntary = zero; //false
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].ArtisteId == -3){
+        Menu(globalUser);
+    }
+    }
+
+    fflush(stdin);
+    printf("\n Enter Booking Date: ");
+    scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+    if(bookingArry[exist].DateBooked.day == -1 || bookingArry[exist].DateBooked.month == -1 || bookingArry[exist].DateBooked.year == -1){
+        exitProgram();
+    }else if(bookingArry[exist].DateBooked.day == -2 || bookingArry[exist].DateBooked.month == -2 || bookingArry[exist].DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].DateBooked.day == -3 || bookingArry[exist].DateBooked.month == -3 || bookingArry[exist].DateBooked.year == -3){
+        Menu(globalUser);
+    }
+
+    while(DateCompare(bookingArry[exist].DateBooked, currentDate()) != 1){
+        fflush(stdin);
+        printf("\n#ERROR# -> Date Must Be Grater Than Today [Date Less]\n");
+        printf("\n Enter A Valid Booking Date: ");
+        scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+        if(bookingArry[exist].DateBooked.day == -1 || bookingArry[exist].DateBooked.month == -1 || bookingArry[exist].DateBooked.year == -1){
+        exitProgram();
+    }else if(bookingArry[exist].DateBooked.day == -2 || bookingArry[exist].DateBooked.month == -2 || bookingArry[exist].DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].DateBooked.day == -3 || bookingArry[exist].DateBooked.month == -3 || bookingArry[exist].DateBooked.year == -3){
+        Menu(globalUser);
+    }
+    }
+
+    while(BookingExist(bookingArry[exist].ArtisteId, bookingArry[exist].DateBooked) >= 0){
+        fflush(stdin);
+        printf("\n#ERROR# -> Date Already Booked By You [ArtisteId Error]\n\n");
+        printf("\n Enter A Valid Booking Date: ");
+        scanf("%d/%d/%d",&bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+        if(bookingArry[exist].DateBooked.day == -1 || bookingArry[exist].DateBooked.month == -1 || bookingArry[exist].DateBooked.year == -1){
+        exitProgram();
+    }else if(bookingArry[exist].DateBooked.day == -2 || bookingArry[exist].DateBooked.month == -2 || bookingArry[exist].DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].DateBooked.day == -3 || bookingArry[exist].DateBooked.month == -3 || bookingArry[exist].DateBooked.year == -3){
+        Menu(globalUser);
+    }
+    }
+
+    while(BookingCountPerYear(bookingArry[exist].ArtisteId) >= 15){
+        fflush(stdin);
+        printf("\n#ERROR# -> This Artiste Already Reached His Yearly Quota [Max Booking Per Year]\n");
+        printf("\n Enter A Valid Booking Date: ");
+        scanf("%d/%d/%d", &bookingArry[exist].DateBooked.day,&bookingArry[exist].DateBooked.month,&bookingArry[exist].DateBooked.year);
+        if(bookingArry[exist].DateBooked.day == -1 || bookingArry[exist].DateBooked.month == -1 || bookingArry[exist].DateBooked.year == -1){
+        exitProgram();
+    }else if(bookingArry[exist].DateBooked.day == -2 || bookingArry[exist].DateBooked.month == -2 || bookingArry[exist].DateBooked.year == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].DateBooked.day == -3 || bookingArry[exist].DateBooked.month == -3 || bookingArry[exist].DateBooked.year == -3){
+        Menu(globalUser);
+    }
+    }
+
+
+    fflush(stdin);
+    printf("\n Enter Booking Type: (O-Overseas | L-Local): ");
+    scanf("%c",&bookingArry[exist].Type);
+    if(bookingArry[exist].Type=='1'){
+        exitProgram();
+    }else if(bookingArry[exist].Type=='2'){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].Type=='3'){
+        Menu(globalUser);
+    }
+
+    fflush(stdin);
+    printf("\n Booking Location: ");
+    gets(bookingArry[exist].Location);
+    if(strcmpi(bookingArry[exist].Location,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(bookingArry[exist].Location,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(bookingArry[exist].Location,"-3") == 0){
+        Menu(globalUser);
+    }
+
+    fflush(stdin);
+    printf("\n Guide: ");
+    gets(bookingArry[exist].Guide);
+    if(strcmpi(bookingArry[exist].Guide,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(bookingArry[exist].Guide,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(bookingArry[exist].Guide,"-3") == 0){
+        Menu(globalUser);
+    }
+
+    fflush(stdin);
+    printf("\n Promoter Name: ");
+    gets(bookingArry[exist].PromoterName);
+    if(strcmpi(bookingArry[exist].PromoterName,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(bookingArry[exist].PromoterName,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(bookingArry[exist].PromoterName,"-3") == 0){
+        Menu(globalUser);
+    }
+
+    fflush(stdin);
+    printf("\n Local Rate: ");
+    scanf("%f",&bookingArry[exist].Rate.local);
+    if(bookingArry[exist].Rate.local == -1){
+        exitProgram();
+    }else if(bookingArry[exist].Rate.local == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].Rate.local == -3){
+        Menu(globalUser);
+    }
+
+    fflush(stdin);
+    printf("\n International Rate: ");
+    scanf("%f",&bookingArry[exist].Rate.overseas);
+    if(bookingArry[exist].Rate.overseas == -1){
+        exitProgram();
+    }else if(bookingArry[exist].Rate.overseas == -2){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(bookingArry[exist].Rate.overseas == -3){
+        Menu(globalUser);
+    }
+
+    fflush(stdin);
+    printf("\n Voluntary Service (Y/N): ");
+    scanf("%c",&voluntaryService);
+    if(voluntaryService == '1'){
+        exitProgram();
+    }else if(voluntaryService == '2'){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(voluntaryService == '3'){
+        Menu(globalUser);
+    }
+
+    if(voluntaryService == 'y' || voluntaryService == 'Y'){
+        bookingArry[exist].IsVoluntary = one; //true
+    }else{
+        bookingArry[exist].IsVoluntary = zero; //false
+    }
+
+    if(bookingArry[exist].Type == 'O' || bookingArry[exist].Type == 'o'){
+
+        fflush(stdin);
+        printf("\n Hotel Name: ");
+        gets(bookingArry[exist].Info.HotelInfo);
+        if(strcmpi(bookingArry[exist].Info.HotelInfo,"-1") == 0){
+        exitProgram();
+    }else if(strcmpi(bookingArry[exist].Info.HotelInfo,"-2") == 0){
+        if(globalUser == Manager){
+            MenuDelete(globalUser);
+        }else{
+            Menu(globalUser);
+        }
+    }else if(strcmpi(bookingArry[exist].Info.HotelInfo,"-3") == 0){
+        Menu(globalUser);
+    }
+
+        fflush(stdin);
+        printf("\n Cost of Hotel: ");
+        scanf("%f",&bookingArry[exist].Info.HotelCharge);
+        if(bookingArry[exist].Info.HotelCharge==-1){
+            exitProgram();
+        }else if(bookingArry[exist].Info.HotelCharge==-2){
+            if(globalUser == Manager){
+                if(globalUser == Manager){
+                        MenuDelete(globalUser);
+                }else{
+                    Menu(globalUser);
+                }
+            }
+            }else if(bookingArry[exist].Info.HotelCharge==-3){
+                Menu(globalUser);
+            }
+
+        fflush(stdin);
+        printf("\n Flight Origin State/Country - Destination State/Country: ");
+        gets(bookingArry[exist].Info.FlightInfo);
+        if(strcmpi(bookingArry[exist].Info.FlightInfo,"-1") == 0){
+            exitProgram();
+        }else if(strcmpi(bookingArry[exist].Info.FlightInfo,"-2") == 0){
+            if(globalUser == Manager){
+                MenuDelete(globalUser);
+            }else{
+                Menu(globalUser);
+            }
+        }else if(strcmpi(bookingArry[exist].Info.FlightInfo,"-3") == 0){
+            Menu(globalUser);
         }
 
-        if(bookingArry[exist].Type == 'O' || bookingArry[exist].Type == 'o'){
-
-            fflush(stdin);
-            printf("\n Hotel Name: ");
-            gets(bookingArry[exist].Info.HotelInfo);
-
-            fflush(stdin);
-            printf("\n Cost of Hotel: ");
-            scanf("%f",&bookingArry[exist].Info.HotelCharge);
-
-            fflush(stdin);
-            printf("\n Flight Origin State/Country - Destination State/Country: ");
-            gets(bookingArry[exist].Info.FlightInfo);
-
-            fflush(stdin);
-            printf("\n Plane Fare: ");
-            scanf("%f",&bookingArry[exist].Info.PlaneFare);
-
-            fflush(stdin);
-            printf("\n Number Of People: ");
-            scanf("%d",&bookingArry[exist].Info.NumberOfPersons);
+        fflush(stdin);
+        printf("\n Plane Fare: ");
+        scanf("%f",&bookingArry[exist].Info.PlaneFare);
+        if(bookingArry[exist].Info.PlaneFare==-1){
+            exitProgram();
+        }else if(bookingArry[exist].Info.PlaneFare==-2){
+            if(globalUser == Manager){
+                MenuDelete(globalUser);
+            }else{
+                Menu(globalUser);
+            }
+        }else if(bookingArry[exist].Info.PlaneFare==-3){
+            Menu(globalUser);
         }
+
+        fflush(stdin);
+        printf("\n Number Of People: ");
+        scanf("%d",&bookingArry[exist].Info.NumberOfPersons);
+        if(bookingArry[exist].Info.NumberOfPersons==-1){
+            exitProgram();
+        }else if(bookingArry[exist].Info.NumberOfPersons==-2){
+            if(globalUser == Manager){
+                MenuDelete(globalUser);
+            }else{
+                Menu(globalUser);
+            }
+        }else if(bookingArry[exist].Info.NumberOfPersons==-3){
+            Menu(globalUser);
+        }
+    }
 
         //bookingArry[exist].EmployeeId = LoggedInUser;
 

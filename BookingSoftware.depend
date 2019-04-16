@@ -34,18 +34,18 @@
 1555085729 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\helpers.h
 	<string.h>
 
-1555390552 source:c:\users\jorda\desktop\bookingsoftware\bookingsoftware\main.c
+1555414106 source:c:\users\jorda\desktop\bookingsoftware\bookingsoftware\main.c
 	<stdio.h>
 	<stdlib.h>
 	"Headers/Functions.h"
 
-1555391539 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
+1555414187 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
 	<time.h>
 	<ctype.h>
 	<conio.h>
 	"Manipulation.h"
 
-1555376765 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\datamanipulation.h
+1555414135 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\datamanipulation.h
 	<stdio.h>
 	<stdlib.h>
 	<strings.h>
@@ -97,9 +97,10 @@
 	"DATAManipulation.h"
 	"Display.h"
 
-1555393501 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\manipulation.h
+1555414318 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\manipulation.h
 	"DATAManipulation.h"
 	"Display.h"
+	"Functions.h"
 
 1555381152 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\display.h
 	"Helpers.h"
