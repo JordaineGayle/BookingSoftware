@@ -16,6 +16,24 @@ int file_exists(char * filename)
     return 0;
 }
 
+void CreateLog(char *description){
+
+    ActivityLog log;
+
+    log.UserId = LoggedInUser;
+
+    log.Description = description;
+
+    time_t mytime;
+
+    mytime = time(NULL);
+
+    log.Date = ctime(&mytime);
+
+    AddLog(log,ActivityFileName, "ab+");
+
+}
+
 int DateCompare(Date d1, Date d2){
     if (d1.year < d2.year)
        return -1;
@@ -186,6 +204,79 @@ int UserExist(int Id){
 
     return -1;
 }
+
+
+int UserExistByUsername(char *name){
+
+    const int counted = UserDataCount();
+
+    if(counted > -1){
+        User * ptr = ListOfUser();
+
+        for(int usr = 0; usr <  counted; usr++){
+
+        if( strcmpi((ptr+usr)->Username,name) == 0 ){
+            return usr;
+            }
+        }
+    }
+
+    return -1;
+}
+
+
+User * QueryUserByUsername(char * username){
+    ListPos = 0;
+    if (file_exists(UserFileName) == 0) {
+
+		const int counted = UserDataCount();
+
+		int foundCounter = 0;
+
+
+
+		if(counted <= 0){
+			return NULL;
+		}else{
+			User * ptr = ListOfUser();
+            int index[counted+1000];
+			if (ptr == NULL) {
+				return NULL;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ( strcmpi((ptr+x)->Username, username) == 0){
+                    index[foundCounter] = x;
+					foundCounter++;
+				}
+			}
+
+			if(foundCounter > 0){
+                User matchList[foundCounter];
+
+                User * listPtr = &matchList[0];
+                //Booking * ptr2 = BookingList();
+                for(int x = 0; x < foundCounter; x++){
+                     User u = *(ptr+index[x]);
+                     matchList[x] = u;
+                }
+
+                if(listPtr != NULL){
+                    ListPos = foundCounter;
+                    return listPtr;
+                }else{
+                    return NULL;
+                }
+			}else{
+                return NULL;
+			}
+		}
+	}
+
+	return NULL;
+}
+
 
 /****************************************************/
 
@@ -441,6 +532,33 @@ int FoundationExistById(int Id) {
 	return -1;
 }
 
+int FoundationExistByYearFounded(int year) {
+
+	if (file_exists(FoundationFileName) == 0) {
+
+		const int counted = FoundationCount();
+
+		if(counted <= 0){
+            return -1;
+		}else{
+            Foundation * ptr = FoundationList();
+
+            if (ptr == NULL) {
+                return -1;
+            }
+
+            for (int x = 0; x < counted; x++) {
+
+                if ( (ptr+x)->YearFounded ==year ) {
+                    return x;
+                }
+            }
+		}
+	}
+
+	return -1;
+}
+
 Foundation * delFoundation(int Id){
 
         const int counted = FoundationCount();
@@ -467,6 +585,59 @@ Foundation * delFoundation(int Id){
 
 
 		return newFoundation;
+}
+
+
+Foundation * QueryFoundationByYearFound(int year){
+    ListPos = 0;
+    if (file_exists(FoundationFileName) == 0) {
+
+		const int counted = FoundationCount();
+
+		int foundCounter = 0;
+
+
+
+		if(counted <= 0){
+			return NULL;
+		}else{
+			Foundation * ptr = FoundationList();
+            int index[counted+1000];
+			if (ptr == NULL) {
+				return NULL;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ( (ptr+x)->YearFounded == year){
+                    index[foundCounter] = x;
+					foundCounter++;
+				}
+			}
+
+			if(foundCounter > 0){
+                Foundation matchList[foundCounter];
+
+                Foundation * listPtr = &matchList[0];
+
+                for(int x = 0; x < foundCounter; x++){
+                     Foundation obj = *(ptr+index[x]);
+                     matchList[x] = obj;
+                }
+
+                if(listPtr != NULL){
+                    ListPos = foundCounter;
+                    return listPtr;
+                }else{
+                    return NULL;
+                }
+			}else{
+                return NULL;
+			}
+		}
+	}
+
+	return NULL;
 }
 
 
@@ -784,6 +955,214 @@ int BookingExistById(int Id){
 	return -1;
 }
 
+Booking * QueryBookingByDate(Date date){
+    ListPos = 0;
+    if (file_exists(BookingFileName) == 0) {
+
+		const int counted = BookingCount();
+
+		int foundCounter = 0;
+
+
+
+		if(counted <= 0){
+			return NULL;
+		}else{
+			Booking * ptr = BookingList();
+            int index[counted+1000];
+			if (ptr == NULL) {
+				return NULL;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ((ptr+x)->DateBooked.day == date.day && (ptr+x)->DateBooked.month == date.month && (ptr+x)->DateBooked.year == date.year) {
+                    index[foundCounter] = x;
+					foundCounter++;
+				}
+			}
+
+			if(foundCounter > 0){
+                Booking matchList[foundCounter];
+
+                Booking * listPtr = &matchList[0];
+                //Booking * ptr2 = BookingList();
+                for(int x = 0; x < foundCounter; x++){
+                     Booking b = *(ptr+index[x]);
+                     matchList[x] = b;
+                }
+
+                if(listPtr != NULL){
+                    ListPos = foundCounter;
+                    return listPtr;
+                }else{
+                    return NULL;
+                }
+			}else{
+                return NULL;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+Booking * QueryBookingByArtisteId(int Id){
+    ListPos = 0;
+    if (file_exists(BookingFileName) == 0) {
+
+		const int counted = BookingCount();
+
+		int foundCounter = 0;
+
+
+
+		if(counted <= 0){
+			return NULL;
+		}else{
+			Booking * ptr = BookingList();
+            int index[counted+1000];
+			if (ptr == NULL) {
+				return NULL;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ( (ptr+x)->ArtisteId == Id){
+                    index[foundCounter] = x;
+					foundCounter++;
+				}
+			}
+
+			if(foundCounter > 0){
+                Booking matchList[foundCounter];
+
+                Booking * listPtr = &matchList[0];
+                //Booking * ptr2 = BookingList();
+                for(int x = 0; x < foundCounter; x++){
+                     Booking b = *(ptr+index[x]);
+                     matchList[x] = b;
+                }
+
+                if(listPtr != NULL){
+                    ListPos = foundCounter;
+                    return listPtr;
+                }else{
+                    return NULL;
+                }
+			}else{
+                return NULL;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+Booking * QueryBookingByPromoterName(char * promoterName){
+    ListPos = 0;
+    if (file_exists(BookingFileName) == 0) {
+
+		const int counted = BookingCount();
+
+		int foundCounter = 0;
+
+
+
+		if(counted <= 0){
+			return NULL;
+		}else{
+			Booking * ptr = BookingList();
+            int index[counted+1000];
+			if (ptr == NULL) {
+				return NULL;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ( strcmpi((ptr+x)->PromoterName, promoterName) == 0){
+                    index[foundCounter] = x;
+					foundCounter++;
+				}
+			}
+
+			if(foundCounter > 0){
+                Booking matchList[foundCounter];
+
+                Booking * listPtr = &matchList[0];
+                //Booking * ptr2 = BookingList();
+                for(int x = 0; x < foundCounter; x++){
+                     Booking b = *(ptr+index[x]);
+                     matchList[x] = b;
+                }
+
+                if(listPtr != NULL){
+                    ListPos = foundCounter;
+                    return listPtr;
+                }else{
+                    return NULL;
+                }
+			}else{
+                return NULL;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+Booking * QueryBookingEmployeeId(int Id){
+    ListPos = 0;
+    if (file_exists(BookingFileName) == 0) {
+
+		const int counted = BookingCount();
+
+		int foundCounter = 0;
+
+
+
+		if(counted <= 0){
+			return NULL;
+		}else{
+			Booking * ptr = BookingList();
+            int index[counted+8000];
+			if (ptr == NULL) {
+				return NULL;
+			}
+
+			for (int x = 0; x < counted; x++) {
+
+				if ( (ptr+x)->EmployeeId == Id){
+                    index[foundCounter] = x;
+					foundCounter++;
+				}
+			}
+
+			if(foundCounter > 0){
+                Booking matchList[foundCounter];
+
+                Booking * listPtr = &matchList[0];
+
+                for(int x = 0; x < foundCounter; x++){
+                     Booking b = *(ptr+index[x]);
+                     matchList[x] = b;
+                }
+
+                if(listPtr != NULL){
+                    ListPos = foundCounter;
+                    return listPtr;
+                }else{
+                    return NULL;
+                }
+			}else{
+                return NULL;
+			}
+		}
+	}
+
+	return NULL;
+}
 int BookingCountPerYear(int ArtisteId){
 
 	if(file_exists(BookingFileName) == 0){
@@ -852,7 +1231,15 @@ int BookingCountPerArtiste(int ArtisteId){
 
 
 
+/**************************Dedicated Function**************************/
 
+void ArtisteYearlyReport(){
+
+
+
+}
+
+/****************************Dedicated Function**********************/
 
 
 

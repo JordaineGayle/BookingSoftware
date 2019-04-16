@@ -102,15 +102,15 @@ typedef struct{
  int Id;
  int ArtisteId;
  float YearlyEarnings;
- char *Date;
+ char Date[50];
 }ArtisteReport;
 
 typedef struct{
  int Id;
  int FoundationId;
  float Revenue;
- char *CurrentMajorCharity;
- char *Date;
+ char CurrentMajorCharity[100];
+ char Date[100];
 }FoundationReport;
 
 typedef struct{
@@ -134,9 +134,8 @@ typedef struct{
 
 typedef struct{
  int InvoiceId;
-
- char *Date;
- char *Description;
+ char Date[50];
+ char Description[100];
  int AmountOfShows;
  float Price;
  float GrandTotal;

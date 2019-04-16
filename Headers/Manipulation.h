@@ -141,6 +141,7 @@ void AddUser(int firstTime){
     }else if(result == 3){
         fflush(stdin);
         printf("\nRecord Added Successfully!\n");
+        CreateLog("New User Added To System");
     }else{
         fflush(stdin);
         printf("\nAn Error Has Occurred\n");
@@ -235,6 +236,7 @@ void DeleteUser(){
         //fseek(newFile, 0)
         if(fwrite(newUserList,sizeof(User), newArrayLength, newFile)){
             printf("\nNew User Successfully Deleted!\n");
+            CreateLog("User Deleted");
         }else{
            printf("\n#ERROR# -> Failed To Delete User [Internal Error]\n");
         }
@@ -512,6 +514,7 @@ void AddArtiste() {
 
 			if (success == 3 && success1 == 3) {
 				printf("\nAccount Created Successfully!\n");
+				CreateLog("New Artiste Created");
 			}
 			else {
 				printf("\n#ERROR# -> An Unexpected Error Has Occured [Internal System Error]\n");
@@ -643,9 +646,9 @@ void DeleteArtiste() {
 
 		fclose(file2);
 
+		printf("\\nRecord Deleted Successfully\n");
 
-
-
+		CreateLog("Deleted Artiste From System");
 	}
 	else {
 		printf("\n#ERROR# -> Failed To Delete Artiste [Doesn't Exist]\n");
@@ -981,6 +984,7 @@ void AddBooking(){
 
     if(CreateBooking(booking, BookingFileName, "ab+") > -1){
         printf("\nBooking Added Successfully\n");
+        CreateLog("New Booking Added To The System");
     }else{
         printf("\nFailed To Add Booking\n");
     }
@@ -1075,6 +1079,7 @@ void DeleteBooking(){
         if(fwrite(newBookingList,sizeof(Booking), newArrayLength, file)){
             fclose(file);
             printf("\nFile Record Successfully\n");
+            CreateLog("Deleted Booking From System");
         }else{
             fclose(file);
             printf("\n#ERROR# -> Failed To Delete Record [Internal Error]\n");
@@ -1199,6 +1204,7 @@ void UpdateUser(){
         if(fwrite(userArry, sizeof(User), totalUsers, fFile)){
             fclose(fFile);
             printf("\nUser Record Successfully Updated!\n");
+            CreateLog("User Record Has Been Updated");
         }else{
             fclose(fFile);
             printf("\n#ERROR# -> Failed To Update User Record [Internal Error]\n");
@@ -1563,6 +1569,7 @@ void UpdateBooking() {
         if(fwrite(bookingArry, sizeof(Booking), totalBooking, fFile)){
             fclose(fFile);
             printf("\nBooking Record Successfully Updated!\n");
+            CreateLog("Booking Record Has Been Updated");
         }else{
             fclose(fFile);
             printf("\n#ERROR# -> Failed To Update Booking Record [Internal Error]\n");
@@ -1656,6 +1663,7 @@ void UpdateFoundation(){
         if(fwrite(accountArry, sizeof(Accounts), totalAccounts, aFile)){
             fclose(aFile);
             printf("\nFoundation Record Successfully Updated!\n");
+            CreateLog("Foundation Record Has Been Updated");
         }else{
             fclose(aFile);
             printf("\n#ERROR# -> Failed To Update Foundation Record [Internal Error]\n");
@@ -1761,6 +1769,7 @@ void UpdateArtiste() {
         if(fwrite(accountArry, sizeof(Accounts), totalAccounts, aFile)){
             fclose(aFile);
             printf("\nArtiste Record Successfully Updated!\n");
+            CreateLog("Artiste Record Has Been Updated");
         }else{
             fclose(aFile);
             printf("\n#ERROR# -> Failed To Update Artiste Record [Internal Error]\n");

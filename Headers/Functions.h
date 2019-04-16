@@ -176,9 +176,9 @@ void MenuSearch(int userType){
     if(userType == Manager){
 
         st();st();
-        printf("\n\n a). QueryUserById\n b). QueryUserByUsername\n c). QueryArtisteById\n d). QueryArtisteStageName\n");
-        printf(" e). QueryFoundationById\n f). QueryFoundationByDateFounded\n g). QueryBookingByBookingNumber\n g). QueryBookingByArtisteId\n");
-        printf(" i). QueryBookingByDate\n j). QueryBookingByPromoterName\n k.) QueryBookingByEmployeeId\n\n");
+        printf("\n\n a). QueryUserById\n b). QueryUserByUser-name\n c). QueryArtisteById\n d). QueryArtisteStageName\n");
+        printf(" e). QueryFoundationById\n f). QueryFoundationByDateFounded\n g). QueryBookingByBookingNumber\n h). QueryBookingByArtisteId\n");
+        printf(" i). QueryBookingByDate\n j). QueryBookingByPromoterName\n k). QueryBookingByEmployeeId\n\n");
     }else{
         st();st();
         printf("\n\n a). QueryArtisteById\n b). QueryArtisteStageName\n");
@@ -186,9 +186,20 @@ void MenuSearch(int userType){
         printf(" e). QueryBookingByDate\n f). QueryBookingByPromoterName\n g.) QueryBookingByEmployeeId\n\n");
     }
 
+    printf("\n\n * 1 Exit Program * \n");
+    printf(" * 2 Main Menu * \n");
+
     fflush(stdin);
     printf("\n Enter Query Option: ");
     scanf("%c",&selection);
+
+
+
+        if(selection == '1'){
+            exitProgram();
+        }else if(selection == '2'){
+            Menu(globalUser);
+        }
 
     if(selection == 'a' || selection == 'A'){
 
@@ -196,9 +207,77 @@ void MenuSearch(int userType){
             SearchUserById();
 
         }else{
-
+            SearchArtisteById();
         }
 
+    }else if(selection == 'b' || selection == 'B'){
+
+        if(userType==Manager){
+            SearchUserByUsername();
+        }else{
+            SearchArtisteByStageName();
+        }
+
+    }else if(selection == 'c' || selection == 'C'){
+
+        if(userType==Manager){
+            SearchArtisteById();
+
+        }else{
+            SearchBookingByBookingNumber();
+        }
+
+    }else if(selection == 'd' || selection == 'D'){
+
+        if(userType==Manager){
+            SearchArtisteByStageName();
+        }else{
+            SearchBookingByArtisteId();
+        }
+
+    }else if(selection == 'e' || selection == 'E'){
+
+        if(userType==Manager){
+            SearchFoundationById();
+
+        }else{
+            SearchBookingByDate();
+        }
+
+    }else if(selection == 'f' || selection == 'F'){
+
+        if(userType==Manager){
+            SearchFoundationByDateFounded();
+        }else{
+            SearchBookingByPromoterName();
+        }
+
+    }else if(selection == 'g' || selection == 'G'){
+
+        if(userType==Manager){
+            SearchBookingByBookingNumber();
+        }else{
+            SearchBookingByEmployeeId();
+        }
+
+    }else if( (selection == 'h' || selection == 'H') && userType == Manager){
+
+        SearchBookingByArtisteId();
+
+    }else if( (selection == 'i' || selection == 'I')  && userType == Manager){
+
+        SearchBookingByDate();
+
+    }else if( (selection == 'j' || selection == 'J')  && userType == Manager){
+
+        SearchBookingByPromoterName();
+
+    }else if( (selection == 'k' || selection == 'K')  && userType == Manager){
+
+        SearchBookingByEmployeeId();
+
+    }else{
+        printf("\n#ERROR# -> Please select a valid option [Option Error]\n\n");
     }
 
     MenuSearch(userType);
@@ -207,9 +286,14 @@ void MenuSearch(int userType){
 void MenuReport(){
 
     st();st();
-    printf("\n\n\t\t\t\t*Please Select an Option Below*\n\n");
+    printf("\n\n\t\t\t\t*Please Select a Option Below*\n\n");
 
     printf(" a). Artiste Yearly Earning Report\n b). Foundation Revenue Report\n c). Generate Invoice\n d). Main Menu\n e). Exit");
+
+
+    st();st();
+    nl(2);
+
 
 }
 
@@ -362,7 +446,7 @@ void Menu(int userType){
 
         }else{
 
-            MenuReport(userType);
+            MenuReport();
         }
     }else if( (menuSelection == 'e' || menuSelection == 'E')){
 

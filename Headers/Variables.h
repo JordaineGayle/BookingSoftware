@@ -1,5 +1,6 @@
 #ifndef VARIABLES_H_INCLUDED
 #define VARIABLES_H_INCLUDED
+#include <time.h>
 #include "Structures.h"
 
 char * UserFileName = "Database/User/User.dat";
@@ -15,4 +16,5 @@ int recordCounter = 0;
 int recordExist = 0;
 UserType globalUser;
 int LoggedInUser;
+int ListPos;
 #endif // VARIABLES_H_INCLUDED
