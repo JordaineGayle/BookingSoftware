@@ -1,0 +1,10 @@
+InvoiceId	Date	Description	AmountShows	ArtisteName	GrandTotal
+
+70013	Wed Apr 17 07:04:41 2019
+	2	1	159000.00
+
+InvoiceId	Date	Description	AmountShows	ArtisteName	GrandTotal
+
+80017	Wed Apr 17 07:05:31 2019
+	2	1	159000.00
+

@@ -34,19 +34,19 @@
 1555085729 c:\users\jgayle.avantmark\documents\bookingsoftware\bookingsoftware\headers\helpers.h
 	<string.h>
 
-1555414106 source:c:\users\jorda\desktop\bookingsoftware\bookingsoftware\main.c
+1555503228 source:c:\users\jorda\desktop\bookingsoftware\bookingsoftware\main.c
 	<stdio.h>
 	<stdlib.h>
 	"Headers/Functions.h"
 
-1555421325 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
+1555502295 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\functions.h
 	<time.h>
 	<ctype.h>
 	<conio.h>
 	"Manipulation.h"
 	"Search.h"
 
-1555414135 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\datamanipulation.h
+1555502295 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\datamanipulation.h
 	<stdio.h>
 	<stdlib.h>
 	<strings.h>
@@ -54,12 +54,13 @@
 	<string.h>
 	"Helpers.h"
 
-1555376765 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\structures.h
+1555502295 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\structures.h
 
-1555376765 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\variables.h
+1555505049 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\variables.h
+	<time.h>
 	"Structures.h"
 
-1555388442 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\helpers.h
+1555507755 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\helpers.h
 	<string.h>
 	"Variables.h"
 
@@ -101,7 +102,7 @@
 	"Display.h"
 	"Functions.h"
 
-1555414318 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\manipulation.h
+1555502295 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\manipulation.h
 	"DATAManipulation.h"
 	"Display.h"
 	"Functions.h"
@@ -109,7 +110,7 @@
 1555418837 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\display.h
 	"Helpers.h"
 
-1555421337 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\search.h
+1555502295 c:\users\jorda\desktop\bookingsoftware\bookingsoftware\headers\search.h
 	"Helpers.h"
 
 1555439173 c:\users\jgayle.avantmark\desktop\bookingsoftware\headers\search.h

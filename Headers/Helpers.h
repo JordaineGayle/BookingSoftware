@@ -46,6 +46,48 @@ void CreateLog(char *description){
 
 }
 
+
+char * CreateInvoiceName(){
+    time_t mytime;
+
+    mytime = time(NULL);
+
+    char * name = ctime(&mytime);
+
+    char actualName[100];
+
+    strcat(actualName,name);
+
+    Sleep(200);
+
+    printf("\n%s\n",actualName);
+
+    char compname[200];
+
+    char correctName[200];
+
+    strcat(compname,"Database/Invoice/");
+
+     printf("\n%s\n",compname);
+
+    strcat(compname,actualName);
+
+    strcat(compname,".txt");
+
+    printf("\n%s\n",compname);
+
+    for(int x = 0; x < strlen(&compname); x++){
+        if( compname[x] == ' '  ){
+            compname[x] = '\b';
+        }
+    }
+
+
+    printf("\n%s\n",compname);
+
+    return &actualName;
+}
+
 int DateCompare(Date d1, Date d2){
     if (d1.year < d2.year)
        return -1;
@@ -1385,18 +1427,18 @@ void GenerateInvoice(){
             char dt[100];
 
 
-            strcat(ctime(&mytime), dt);
+            //strcat(ctime(&mytime), dt);
 
-            strcat(ext,dt);
+            //strcat(ext,dt);
 
-            FILE * fp = fopen("ab.txt","a+");
+            FILE * fp = fopen(CreateInvoiceName(),"a+");
 
             fprintf(fp,"InvoiceId\tDate\tDescription\tAmountShows\tArtisteName\tGrandTotal\n\n");
 
             if((bPtr+x)->Type == 'l' || (bPtr+x)->Type == 'L'){
                 fprintf(fp, "%ld\t%s\t%d\t%d\t%.2f\n\n",randAccNum(10000,90000),ctime(&mytime),ListPos,(bPtr+x)->ArtisteId,(bPtr+x)->Rate.local);
             }else{
-                fprintf(fp, "%ld\t%s\t%d\t%d\t%.2f\n\n",randAccNum(10000,90000),ctime(&mytime),ListPos,(bPtr+x)->ArtisteId,(bPtr+x)->Rate.overseas);
+                fprintf(fp, "%ld\t\t%s\t\t%d\t\t%d\t\t%.2f\n\n",randAccNum(10000,90000),ctime(&mytime),ListPos,(bPtr+x)->ArtisteId,(bPtr+x)->Rate.overseas);
             }
 
             fclose(fp);

@@ -5,6 +5,7 @@
 int main()
 {
 
+CreateInvoiceName();
 ArtisteYearlyReport();
 
     Welcome();
